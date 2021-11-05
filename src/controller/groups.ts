@@ -1,5 +1,6 @@
-import db from '../models/database';
+const db = require('../models/database');
 
 const groupsController = {};
 
-export default groupsController;
+module.exports = groupsController;
+export {};

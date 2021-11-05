@@ -1,21 +1,21 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import apiRouter from './routers/api';
+const express = require('express');
+const apiRouter = require('./routers/api');
+require('dotenv').config();
 
-dotenv.config();
-export const app = express();
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', apiRouter);
 
-app.get('/', (req, res) => {
+app.get('/', (req: any, res: any) => {
   res.status(200).json({});
 });
 
-app.use('*', (req, res) => {
+app.use('*', (req: any, res: any) => {
   res.status(404).json({});
-})
+});
 
-export default app;
+module.exports = app;
+export {};

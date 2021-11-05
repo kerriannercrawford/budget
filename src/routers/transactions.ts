@@ -1,30 +1,31 @@
-import express from 'express';
-import transactionsController from '../controller/transactions';
+const express = require('express');
+const transactionsController = require('../controller/transactions');
 
 const transactionsRouter = express.Router();
 
-transactionsRouter.post('/', (req, res) => {
-  res.status(200).json({});
-})
-
-transactionsRouter.get('/:user_id', (req, res) => {
+transactionsRouter.post('/', (req: any, res: any) => {
   res.status(200).json({});
 });
 
-transactionsRouter.get('/:user_id/:account_id', (req, res) => {
+transactionsRouter.get('/users/:user_id', (req: any, res: any) => {
   res.status(200).json({});
 });
 
-transactionsRouter.get('/:user_id/:transaction_id', (req, res) => {
+transactionsRouter.get('/users/:user_id/accounts/:account_id', (req: any, res: any) => {
   res.status(200).json({});
-})
+});
 
-transactionsRouter.patch('/:transaction_id', (req, res) => {
+transactionsRouter.get('/:transaction_id/users/:user_id/', (req: any, res: any) => {
   res.status(200).json({});
-})
+});
 
-transactionsRouter.delete('/:user_id/:transaction_id', (req, res) => {
+transactionsRouter.patch('/:transaction_id', (req: any, res: any) => {
   res.status(200).json({});
-})
+});
 
-export default transactionsRouter;
+transactionsRouter.delete(':transaction_id/users/:user_id/', (req: any, res: any) => {
+  res.status(200).json({});
+});
+
+module.exports = transactionsRouter;
+export {};

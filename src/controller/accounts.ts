@@ -1,6 +1,6 @@
-import db from '../models/database';
+const db = require('../models/database');
 
 const accountsController = {};
 
-export default accountsController;
-
+module.exports = accountsController;
+export {};

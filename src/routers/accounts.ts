@@ -1,26 +1,27 @@
-import express from 'express';
-import accountsController from '../controller/accounts';
+const express = require('express');
+const accountsController = require('../controller/accounts');
 
 const accountsRouter = express.Router();
 
-accountsRouter.post('/', (req, res) => {
-  res.status(200).json({})
-})
-
-accountsRouter.get('/:user_id', (req, res) => {
+accountsRouter.post('/', (req: any, res: any) => {
   res.status(200).json({});
 });
 
-accountsRouter.get('/:user_id/:account_id', (req, res) => {
+accountsRouter.get('/users/:user_id', (req: any, res: any) => {
   res.status(200).json({});
 });
 
-accountsRouter.patch('/:account_id', (req, res) => {
-  res.status(200).json({})
+accountsRouter.get('/:account_id/users/:user_id', (req: any, res: any) => {
+  res.status(200).json({});
 });
 
-accountsRouter.delete('/:account_id', (req, res) => {
-  res.status(200).json({})
-})
+accountsRouter.patch('/:account_id', (req: any, res: any) => {
+  res.status(200).json({});
+});
 
-export default accountsRouter;
+accountsRouter.delete('/:account_id', (req: any, res: any) => {
+  res.status(200).json({});
+});
+
+module.exports = accountsRouter;
+export {};

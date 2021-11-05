@@ -1,31 +1,30 @@
-import express from 'express';
-import usersController from '../controller/users';
-
+const express = require('express');
+const usersController = require('../controller/users');
 const usersRouter = express.Router();
 
-
-usersRouter.get('/', (req, res) => {
+usersRouter.get('/', (req: any, res: any) => {
   res.status(200).json({});
 });
 
-usersRouter.get('/:user_id', (req, res) => {
+usersRouter.get('/:user_id', (req: any, res: any) => {
   res.status(200).json({});
-})
+});
 
-usersRouter.post('/login', (req, res) => {
+usersRouter.post('/login', (req: any, res: any) => {
   res.status(200).json({});
-})
+});
 
-usersRouter.post('/create', (req, res) => {
+usersRouter.post('/create', (req: any, res: any) => {
   res.status(200).json({});
-})
+});
 
-usersRouter.patch('/:user_id', (req, res) => {
+usersRouter.patch('/:user_id', (req: any, res: any) => {
   res.status(200).json({});
-})
+});
 
-usersRouter.delete('/:user_id', (req, res) => {
+usersRouter.delete('/:user_id', (req: any, res: any) => {
   res.status(200).json({});
-})
+});
 
-export default usersRouter;
+module.exports = usersRouter;
+export {};

@@ -1,5 +1,6 @@
-import db from '../models/database';
+const db = require('../models/database');
 
 const transactionsController = {};
 
-export default transactionsController;
+module.exports = transactionsController;
+export {};

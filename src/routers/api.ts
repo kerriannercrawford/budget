@@ -1,16 +1,16 @@
-import express from 'express';
-import usersRouter from './users';
-import accountsRouter from './accounts';
-import categoriesRouter from './categories';
-import groupsRouter from './groups';
-import payeesRouter from './payees';
-import transactionsRouter from './transactions';
+const express = require('express');
+const accountsRouter = require('../routers/accounts');
+const categoriesRouter = require('../routers/categories');
+const groupsRouter = require('../routers/groups');
+const payeesRouter = require('../routers/payees');
+const transactionsRouter = require('../routers/transactions');
+const usersRouter = require('../routers/users');
 
 const apiRouter = express.Router();
 
-apiRouter.get('/', (req, res, next) => {
-  res.send(400).json({body: 'Uh oh! API record not found'})
-})
+apiRouter.get('/', (req: any, res: any) => {
+  res.status(400).json({body: 'Uh oh! API record not found'});
+});
 
 apiRouter.use('/accounts', accountsRouter);
 apiRouter.use('/categories', categoriesRouter);
@@ -19,4 +19,5 @@ apiRouter.use('/payees', payeesRouter);
 apiRouter.use('/transactions', transactionsRouter);
 apiRouter.use('/users', usersRouter);
 
-export default apiRouter;
+module.exports = apiRouter;
+export {};

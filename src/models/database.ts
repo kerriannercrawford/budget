@@ -7,7 +7,7 @@ const pool = new Pool({
 
 // TO DO: FIX ANY
 module.exports = {
-  query: (text: string, params: any, callback: any) => {
+  query: (text: string, params: Array<string>, callback: any) => {
     return pool.query(text, params, callback)
   }
 }

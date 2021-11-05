@@ -1,5 +1,5 @@
-import * as db from '../models/database';
+import db from '../models/database';
 
-export const payeesController = {};
+const payeesController = {};
 
-module.exports = payeesController;
+export default payeesController;

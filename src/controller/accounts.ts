@@ -1,5 +1,6 @@
-import * as db from '../models/database';
+import db from '../models/database';
 
-export const accountsController = {};
+const accountsController = {};
 
-module.exports = accountsController;
+export default accountsController;
+

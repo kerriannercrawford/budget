@@ -3,7 +3,7 @@ import { usersController } from '../controller/users';
 
 export const usersRouter = express.Router();
 
-// accountRouter.get('', middleware, (req, res)) => {
+// usersRouter.get('', middleware, (req, res)) => {
 //   res.status(200).json()
 // }
 

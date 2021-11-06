@@ -11,11 +11,11 @@ transactionsRouter.get('/:user_id', transactionsController.getAllUserTransaction
   res.status(200).json(res.locals.transactions);
 });
 
-transactionsRouter.get('/:user_id/:account_id', transactionsController.getAllAccountTransactions, (req: any, res: any) => {
+transactionsRouter.get('/:user_id/account/:account_id', transactionsController.getAllAccountTransactions, (req: any, res: any) => {
   res.status(200).json(res.locals.transactions);
 });
 
-transactionsRouter.get('/:user_id/:transaction_id', transactionsController.getOneUserTransaction, (req: any, res: any) => {
+transactionsRouter.get('/:user_id/transaction/:transaction_id', transactionsController.getOneUserTransaction, (req: any, res: any) => {
   res.status(200).json(res.locals.transaction);
 });
 
@@ -23,8 +23,12 @@ transactionsRouter.patch('/:transaction_id', transactionsController.updateTransa
   res.status(200).json(res.locals.transaction);
 });
 
-transactionsRouter.delete(':transaction_id/users/:user_id/', transactionsController.deleteTransaction, (req: any, res: any) => {
-  res.status(200).json(res.locals.transaction);
+transactionsRouter.delete(':transaction_id/', transactionsController.deleteTransaction, (req: any, res: any) => {
+  const returnMsg: any = {
+    message: `Deletion of transaction id ${req.params.transaction_id} was successful`
+  }
+  returnMsg.transaction_id = req.params.transaction_id;
+  res.status(200).json(returnMsg);
 });
 
 module.exports = transactionsRouter;

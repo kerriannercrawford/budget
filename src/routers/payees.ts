@@ -21,7 +21,7 @@ payeesRouter.patch('/:payee_id', payeesController.updatePayee, (req: any, res: a
 
 payeesRouter.delete('/:payee_id', payeesController.deletePayee, (req: any, res: any) => {
   const returnMsg: any = {
-    message: `Deletion of group id ${req.params.payee_id} was successful`
+    message: `Deletion of payee id ${req.params.payee_id} was successful`
   }
   returnMsg.payee_id = req.params.payee_id;
   res.status(200).json(returnMsg);

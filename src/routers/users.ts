@@ -10,11 +10,11 @@ usersRouter.get('/:user_id', (req: any, res: any) => {
   res.status(200).json({});
 });
 
-usersRouter.post('/login', (req: any, res: any) => {
-  res.status(200).json({});
+usersRouter.post('/login', usersController.checkForUser, usersController.login, (req: any, res: any) => {
+  res.status(200).json(res.locals.user);
 });
 
-usersRouter.post('/create', usersController.encryptPassword, usersController.createUser, (req: any, res: any) => {
+usersRouter.post('/create', usersController.createUser, (req: any, res: any) => {
   res.status(200).json(res.locals.user);
 });
 

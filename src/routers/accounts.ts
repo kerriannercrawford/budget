@@ -3,8 +3,8 @@ const accountsController = require('../controller/accounts');
 
 const accountsRouter = express.Router();
 
-accountsRouter.post('/', (req: any, res: any) => {
-  res.status(200).json({});
+accountsRouter.post('/', accountsController.createAccount, (req: any, res: any) => {
+  res.status(200).json(res.locals.account);
 });
 
 accountsRouter.get('/users/:user_id', (req: any, res: any) => {

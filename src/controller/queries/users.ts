@@ -17,9 +17,9 @@ queries.getUserById = `
 SELECT * FROM users
 WHERE _id=$1`;
 
-queries.updateUser = async (body: any, userId: string) => {
+queries.updateUser = async (body: any, user_id: string) => {
   const keys = Object.keys(body);
-  const values = [userId];
+  const values = [user_id];
 
   let queryString = `
   UPDATE users

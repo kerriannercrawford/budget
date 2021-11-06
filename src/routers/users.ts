@@ -14,8 +14,8 @@ usersRouter.post('/login', (req: any, res: any) => {
   res.status(200).json({});
 });
 
-usersRouter.post('/create', (req: any, res: any) => {
-  res.status(200).json({});
+usersRouter.post('/create', usersController.encryptPassword, usersController.createUser, (req: any, res: any) => {
+  res.status(200).json(res.locals.user);
 });
 
 usersRouter.patch('/:user_id', (req: any, res: any) => {

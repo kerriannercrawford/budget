@@ -6,7 +6,7 @@ const pool = new Pool({
 });
 
 // TO DO: FIX ANY
-export default {
+module.exports = {
   query: (text: string, params: string[], callback: any) => {
     return pool.query(text, params, callback);
   }

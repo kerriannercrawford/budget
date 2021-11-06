@@ -23,7 +23,11 @@ usersRouter.patch('/:user_id', usersController.updateUser, (req: any, res: any) 
 });
 
 usersRouter.delete('/:user_id', (req: any, res: any) => {
-  res.status(200).json({});
+  const returnMsg: any = {
+    message: `Deletion of user id ${req.params.user_id} was successful`
+  }
+  returnMsg.user_id = req.params.user_id;
+  res.status(200).json(returnMsg);
 });
 
 module.exports = usersRouter;

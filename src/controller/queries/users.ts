@@ -40,7 +40,7 @@ queries.updateUser = async (body: any, userId: string) => {
     } else {
       values.push(body[keys[i]])
     }
-  }
+  };
 
   queryString = queryString + returnString;
 
@@ -48,6 +48,8 @@ queries.updateUser = async (body: any, userId: string) => {
     queryString, 
     values
   }
-}
+};
+
+queries.deleteUser = 'DELETE FROM users WHERE _id=$1 RETURNING _id';
 
 module.exports = queries;

@@ -8,7 +8,7 @@ usersController.createUser = async (req: any, res: any, next: any) => {
   const { username, email, firstName, lastName } = req.body;
   const password = await util.encryptPassword(req.body.password);
 
-  const values: any = [username, password, email, firstName, lastName];
+  const values = [username, password, email, firstName, lastName];
 
   const createResults = await db.query(queries.createUser, values);
   res.locals.user = createResults.rows;
@@ -59,6 +59,11 @@ usersController.updateUser = async (req: any, res: any, next: any) => {
   const { queryString, values } = await queries.updateUser(req.body, req.params.user_id);
   const updatedUser = await db.query(queryString, values);
   res.locals.user = updatedUser.rows;
+  return next();
+}
+
+usersController.deleteUser = async (req: any, res: any, next: any) => {
+  const user = await db.query(queries.deleteUser, [req.params.user_id]);
   return next();
 }
 

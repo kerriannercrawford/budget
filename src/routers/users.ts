@@ -18,8 +18,8 @@ usersRouter.post('/create', usersController.createUser, (req: any, res: any) => 
   res.status(200).json(res.locals.user);
 });
 
-usersRouter.patch('/:user_id', (req: any, res: any) => {
-  res.status(200).json({});
+usersRouter.patch('/:user_id', usersController.updateUser, (req: any, res: any) => {
+  res.status(200).json(res.locals.user);
 });
 
 usersRouter.delete('/:user_id', (req: any, res: any) => {

@@ -40,7 +40,6 @@ usersController.login = async (req: any, res: any, next: any) => {
       }
     })
   }
-
   return next();
 }
 
@@ -53,6 +52,13 @@ usersController.getAllUsers = async (req: any, res: any, next: any) => {
 usersController.getUserById = async (req: any, res: any, next: any) => {
   const user = await db.query(queries.getUserById, [req.params.user_id])
   res.locals.user = user.rows;
+  return next();
+}
+
+usersController.updateUser = async (req: any, res: any, next: any) => {
+  const { queryString, values } = await queries.updateUser(req.body, req.params.user_id);
+  const updatedUser = await db.query(queryString, values);
+  res.locals.user = updatedUser.rows;
   return next();
 }
 

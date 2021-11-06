@@ -9,7 +9,7 @@
       "no-console": false,
       "no-async-without-await": true,
       "no-empty": true,
-      "interface-name": true,
+      "interface-name": false,
       "newline-before-return": true,
       "no-trailing-whitespace": true,
       "semicolon": true,

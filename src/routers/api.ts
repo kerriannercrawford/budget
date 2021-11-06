@@ -1,3 +1,5 @@
+import { ExpressRes, ExpressReq } from '../../src/types/express';
+
 const express = require('express');
 const accountsRouter = require('../routers/accounts');
 const categoriesRouter = require('../routers/categories');
@@ -8,7 +10,7 @@ const usersRouter = require('../routers/users');
 
 const apiRouter = express.Router();
 
-apiRouter.get('/', (req: any, res: any) => {
+apiRouter.get('/', (req: ExpressReq, res: ExpressRes) => {
   res.status(400).json({body: 'Uh oh! API record not found'});
 });
 

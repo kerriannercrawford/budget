@@ -1,4 +1,6 @@
-const queries: any = {};
+import { GroupQuery, RequestBody } from '../../../src/types/queries';
+
+const queries: GroupQuery = {};
 
 queries.createGroup = `
 INSERT INTO groups (user_id, name)
@@ -15,33 +17,33 @@ WHERE user_id=$1 AND _id=$2`;
 
 queries.deleteGroup = 'DELETE FROM groups WHERE _id=$1 RETURNING _id';
 
-queries.updateGroup = async (body: any, group_id: string) => {
+queries.updateGroup = async (body: RequestBody, groupId: string) => {
   const keys = Object.keys(body);
-  const values = [group_id];
+  const values = [groupId];
 
   let queryString = `
   UPDATE groups
   SET `;
 
-  let returnString = ' WHERE _id = $1 RETURNING _id, user_id, name';
+  const returnString = ' WHERE _id = $1 RETURNING _id, user_id, name';
 
   for (let i = 0; i < keys.length; i += 1) {
     const currentChunk = `${keys[i]} = $${i + 2}`;
     queryString = queryString + currentChunk;
     if (i + 1 < keys.length) {
-      queryString = queryString + ', '
+      queryString = queryString + ', ';
     }
     values.push(body[keys[i]]);
-  };
+  }
 
   queryString = queryString + returnString;
 
   return {
-    queryString, 
+    queryString,
     values
-  }
-}
+  };
+};
 
 module.exports = queries;
 
-export {}
+export {};

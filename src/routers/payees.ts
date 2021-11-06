@@ -1,28 +1,30 @@
+import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/express';
+
 const express = require('express');
 const payeesController = require('../controller/payees');
 
 const payeesRouter = express.Router();
 
-payeesRouter.post('/', payeesController.createPayee, (req: any, res: any) => {
+payeesRouter.post('/', payeesController.createPayee, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.payee);
 });
 
-payeesRouter.get('/:user_id', payeesController.getAllUserPayees, (req: any, res: any) => {
+payeesRouter.get('/:user_id', payeesController.getAllUserPayees, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.payees);
 });
 
-payeesRouter.get('/:user_id/:payee_id', payeesController.getOneUserPayee, (req: any, res: any) => {
+payeesRouter.get('/:user_id/:payee_id', payeesController.getOneUserPayee, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.payee);
 });
 
-payeesRouter.patch('/:payee_id', payeesController.updatePayee, (req: any, res: any) => {
+payeesRouter.patch('/:payee_id', payeesController.updatePayee, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.payee);
 });
 
-payeesRouter.delete('/:payee_id', payeesController.deletePayee, (req: any, res: any) => {
-  const returnMsg: any = {
+payeesRouter.delete('/:payee_id', payeesController.deletePayee, (req: ExpressReq, res: ExpressRes) => {
+  const returnMsg: DeleteResponseMessage = {
     message: `Deletion of payee id ${req.params.payee_id} was successful`
-  }
+  };
   returnMsg.payee_id = req.params.payee_id;
   res.status(200).json(returnMsg);
 });

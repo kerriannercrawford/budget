@@ -1,4 +1,6 @@
-const queries: any = {};
+import { PayeeQuery, RequestBody } from '../../../src/types/queries';
+
+const queries: PayeeQuery = {};
 
 queries.createPayee = `
 INSERT INTO payees (user_id, name)
@@ -15,32 +17,32 @@ WHERE user_id=$1 AND _id=$2`;
 
 queries.deletePayee = 'DELETE FROM payees WHERE _id=$1 RETURNING _id';
 
-queries.updatePayee = async (body: any, payee_id: string) => {
+queries.updatePayee = async (body: RequestBody, payeeId: string) => {
   const keys = Object.keys(body);
-  const values = [payee_id];
+  const values = [payeeId];
 
   let queryString = `
   UPDATE payees
   SET `;
 
-  let returnString = ' WHERE _id = $1 RETURNING _id, user_id, name';
+  const returnString = ' WHERE _id = $1 RETURNING _id, user_id, name';
 
   for (let i = 0; i < keys.length; i += 1) {
     const currentChunk = `${keys[i]} = $${i + 2}`;
     queryString = queryString + currentChunk;
     if (i + 1 < keys.length) {
-      queryString = queryString + ', '
+      queryString = queryString + ', ';
     }
     values.push(body[keys[i]]);
-  };
+  }
 
   queryString = queryString + returnString;
 
   return {
-    queryString, 
+    queryString,
     values
-  }
-}
+  };
+};
 
 
 module.exports = queries;

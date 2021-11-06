@@ -1,6 +1,8 @@
-const utils = require('../../util/util')
+import { RequestBody, UserQuery } from '../../../src/types/queries';
 
-const queries: any = {};
+const utils = require('../../util/util');
+
+const queries: UserQuery = {};
 
 queries.createUser = `
 INSERT INTO users (username, password, email, firstName, lastName)
@@ -17,37 +19,37 @@ queries.getUserById = `
 SELECT * FROM users
 WHERE _id=$1`;
 
-queries.updateUser = async (body: any, user_id: string) => {
+queries.updateUser = async (body: RequestBody, userId: string) => {
   const keys = Object.keys(body);
-  const values = [user_id];
+  const values = [userId];
 
   let queryString = `
   UPDATE users
   SET `;
 
-  let returnString = ' WHERE _id = $1 RETURNING _id, username, password, email, firstName, lastName';
+  const returnString = ' WHERE _id = $1 RETURNING _id, username, password, email, firstName, lastName';
 
   for (let i = 0; i < keys.length; i += 1) {
     const currentChunk = `${keys[i]} = $${i + 2}`;
     queryString = queryString + currentChunk;
     if (i + 1 < keys.length) {
-      queryString = queryString + ', '
+      queryString = queryString + ', ';
     }
 
     if (keys[i] === 'password') {
       const hash = await utils.encryptPassword(body[keys[i]]);
-      values.push(hash)
+      values.push(hash);
     } else {
-      values.push(body[keys[i]])
+      values.push(body[keys[i]]);
     }
-  };
+  }
 
   queryString = queryString + returnString;
 
   return {
-    queryString, 
+    queryString,
     values
-  }
+  };
 };
 
 queries.deleteUser = 'DELETE FROM users WHERE _id=$1 RETURNING _id';

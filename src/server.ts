@@ -1,3 +1,5 @@
+import { ExpressRes, ExpressReq, ExpressNext } from '../src/types/express';
+
 const express = require('express');
 const apiRouter = require('./routers/api');
 require('dotenv').config();
@@ -9,15 +11,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', apiRouter);
 
-app.get('/', (req: any, res: any) => {
+app.get('/', (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json({});
 });
 
-app.use('*', (req: any, res: any) => {
+app.use('*', (req: ExpressReq, res: ExpressRes) => {
   res.status(404).json({});
 });
 
-app.use((err: any, req: any, res: any, next: any) => {
+app.use((err: any, req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 500,

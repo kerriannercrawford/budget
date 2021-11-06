@@ -1,4 +1,6 @@
-const queries: any = {};
+import { RequestBody, TransactionQuery } from '../../../src/types/queries';
+
+const queries: TransactionQuery = {};
 
 queries.createTransaction = `
 INSERT INTO transactions (user_id, account_id, date, payee_id, category_id, memo, outflow, inflow, cleared)
@@ -19,32 +21,32 @@ WHERE account_id=$1`;
 
 queries.deleteTransaction = 'DELETE FROM transactions WHERE _id=$1 RETURNING _id';
 
-queries.updateTransaction = async (body: any, transaction_id: string) => {
+queries.updateTransaction = async (body: RequestBody, transactionId: string) => {
   const keys = Object.keys(body);
-  const values = [transaction_id];
+  const values = [transactionId];
 
   let queryString = `
   UPDATE transactions
   SET `;
 
-  let returnString = ' WHERE _id = $1 RETURNING _id, user_id, account_id, date, payee_id, category_id, memo, outflow, inflow, cleared';
+  const returnString = ' WHERE _id = $1 RETURNING _id, user_id, account_id, date, payee_id, category_id, memo, outflow, inflow, cleared';
 
   for (let i = 0; i < keys.length; i += 1) {
     const currentChunk = `${keys[i]} = $${i + 2}`;
     queryString = queryString + currentChunk;
     if (i + 1 < keys.length) {
-      queryString = queryString + ', '
+      queryString = queryString + ', ';
     }
     values.push(body[keys[i]]);
-  };
+  }
 
   queryString = queryString + returnString;
 
   return {
-    queryString, 
+    queryString,
     values
-  }
-}
+  };
+};
 
 module.exports = queries;
 export {};

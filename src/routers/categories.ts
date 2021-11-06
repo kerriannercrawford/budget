@@ -1,28 +1,30 @@
+import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/express';
+
 const express = require('express');
 const categoriesController = require('../controller/categories');
 
 const categoriesRouter = express.Router();
 
-categoriesRouter.post('/', categoriesController.createCategory, (req: any, res: any) => {
+categoriesRouter.post('/', categoriesController.createCategory, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.category);
 });
 
-categoriesRouter.get('/:user_id', categoriesController.getAllUserCategories, (req: any, res: any) => {
+categoriesRouter.get('/:user_id', categoriesController.getAllUserCategories, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.categories);
 });
 
-categoriesRouter.get('/:user_id/:category_id', categoriesController.getOneUserCategory, (req: any, res: any) => {
+categoriesRouter.get('/:user_id/:category_id', categoriesController.getOneUserCategory, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.category);
 });
 
-categoriesRouter.patch('/:category_id', categoriesController.updateCategory, (req: any, res: any) => {
+categoriesRouter.patch('/:category_id', categoriesController.updateCategory, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.category);
 });
 
-categoriesRouter.delete('/:user_id/:category_id', categoriesController.deleteCategory, (req: any, res: any) => {
-  const returnMsg: any = {
+categoriesRouter.delete('/:user_id/:category_id', categoriesController.deleteCategory, (req: ExpressReq, res: ExpressRes) => {
+  const returnMsg: DeleteResponseMessage = {
     message: `Deletion of category id ${req.params.category_id} was successful`
-  }
+  };
   returnMsg.category_id = req.params.category_id;
   res.status(200).json(returnMsg);
 });

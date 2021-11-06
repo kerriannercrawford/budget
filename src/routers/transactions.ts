@@ -3,28 +3,28 @@ const transactionsController = require('../controller/transactions');
 
 const transactionsRouter = express.Router();
 
-transactionsRouter.post('/', (req: any, res: any) => {
-  res.status(200).json({});
+transactionsRouter.post('/', transactionsController.createTransaction, (req: any, res: any) => {
+  res.status(200).json(res.locals.transaction);
 });
 
-transactionsRouter.get('/users/:user_id', (req: any, res: any) => {
-  res.status(200).json({});
+transactionsRouter.get('/:user_id', transactionsController.getAllUserTransactions, (req: any, res: any) => {
+  res.status(200).json(res.locals.transactions);
 });
 
-transactionsRouter.get('/users/:user_id/accounts/:account_id', (req: any, res: any) => {
-  res.status(200).json({});
+transactionsRouter.get('/:user_id/:account_id', transactionsController.getAllAccountTransactions, (req: any, res: any) => {
+  res.status(200).json(res.locals.transactions);
 });
 
-transactionsRouter.get('/:transaction_id/users/:user_id/', (req: any, res: any) => {
-  res.status(200).json({});
+transactionsRouter.get('/:user_id/:transaction_id', transactionsController.getOneUserTransaction, (req: any, res: any) => {
+  res.status(200).json(res.locals.transaction);
 });
 
-transactionsRouter.patch('/:transaction_id', (req: any, res: any) => {
-  res.status(200).json({});
+transactionsRouter.patch('/:transaction_id', transactionsController.updateTransaction, (req: any, res: any) => {
+  res.status(200).json(res.locals.transaction);
 });
 
-transactionsRouter.delete(':transaction_id/users/:user_id/', (req: any, res: any) => {
-  res.status(200).json({});
+transactionsRouter.delete(':transaction_id/users/:user_id/', transactionsController.deleteTransaction, (req: any, res: any) => {
+  res.status(200).json(res.locals.transaction);
 });
 
 module.exports = transactionsRouter;

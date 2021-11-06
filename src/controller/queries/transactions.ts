@@ -1,0 +1,4 @@
+const queries: any = {};
+
+
+export {};

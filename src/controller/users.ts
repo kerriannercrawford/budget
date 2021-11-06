@@ -31,7 +31,6 @@ usersController.checkForUser = async (req: any, res: any, next: any) => {
 }
 
 usersController.login = async (req: any, res: any, next: any) => {
-  console.log(req.body.password)
   const correctPassword = await util.validatePassword(req.body.password, res.locals.user[0].password);
   if (!correctPassword) {
     return next({
@@ -42,6 +41,18 @@ usersController.login = async (req: any, res: any, next: any) => {
     })
   }
 
+  return next();
+}
+
+usersController.getAllUsers = async (req: any, res: any, next: any) => {
+  const users = await db.query(queries.getAllUsers);
+  res.locals.users = users.rows
+  return next();
+}
+
+usersController.getUserById = async (req: any, res: any, next: any) => {
+  const user = await db.query(queries.getUserById, [req.params.user_id])
+  res.locals.user = user.rows;
   return next();
 }
 

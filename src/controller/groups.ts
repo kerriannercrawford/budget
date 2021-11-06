@@ -32,8 +32,6 @@ groupsController.updateGroup = async (req: any, res: any, next: any) => {
 };
 
 groupsController.deleteGroup = async (req: any, res: any, next: any) => {
-  console.log(queries.deleteGroup);
-  console.log(req.params.group_id);
   const group = await db.query(queries.deleteGroup, [req.params.group_id]);
   res.locals.group = group.rows;
   return next();

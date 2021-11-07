@@ -11,5 +11,5 @@ export type DeleteResponseMessage = {
   groupId?: string,
   payeeId?: string,
   categoryId?: string,
-  transaction_id?: string
+  transactionId?: string
 };

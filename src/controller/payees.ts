@@ -2,7 +2,7 @@ import { PayeeQuery } from '../../src/types/queries';
 import { PayeeController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
 
-const db = require('../models/database');
+const payees = require('../models/payeeModel');
 const queries: PayeeQuery = require('./queries/payees');
 
 const payeesController: PayeeController = {};

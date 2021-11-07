@@ -2,7 +2,7 @@ import { GroupQuery } from '../../src/types/queries';
 import { GroupController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
 
-const db = require('../models/database');
+const groups = require('../models/groupsModel');
 const queries: GroupQuery = require('./queries/groups');
 
 const groupsController: GroupController = {};

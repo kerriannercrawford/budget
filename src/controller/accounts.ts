@@ -2,13 +2,12 @@ import { AccountQuery } from '../../src/types/queries';
 import { AccountController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
 
-const db = require('../models/database');
-const queries: AccountQuery = require('./queries/accounts');
+const accounts = require('../models/accountsModel');
 
 const accountsController: AccountController = {};
 
 accountsController.createAccount = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-
+  
   return next();
 };
 

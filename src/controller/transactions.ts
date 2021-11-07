@@ -2,7 +2,7 @@ import { TransactionQuery } from '../../src/types/queries';
 import { TransactionController } from '../../src/types/controller';
 import { ExpressReq, ExpressRes, ExpressNext } from '../../src/types/express';
 
-const db = require('../models/database');
+const transactions = require('../models/transactionsModel');
 const queries: TransactionQuery = require('./queries/transactions');
 
 const transactionsController: TransactionController = {};

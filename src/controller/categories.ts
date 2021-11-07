@@ -2,7 +2,7 @@ import { CategoryQuery } from '../../src/types/queries';
 import { CategoryController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
 
-const db = require('../models/database');
+const categories = require('../models/categoryModel');
 const queries: CategoryQuery = require('./queries/categories');
 
 const categoriesController: CategoryController = {};

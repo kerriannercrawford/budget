@@ -1,7 +1,8 @@
+import { TransactionController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/express';
 
 const express = require('express');
-const transactionsController = require('../controller/transactions');
+const transactionsController: TransactionController = require('../controller/transactions');
 
 const transactionsRouter = express.Router();
 
@@ -20,6 +21,10 @@ transactionsRouter.get('/:user_id/account/:account_id', transactionsController.g
 transactionsRouter.get('/:user_id/transaction/:transaction_id', transactionsController.getOneUserTransaction, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.transaction);
 });
+
+transactionsRouter.get('/memo/:transaction_id', transactionsController.getTransactionMemoById, (req: ExpressReq, res: ExpressRes) => {
+  res.status(200).json(res.locals.memo);
+})
 
 transactionsRouter.patch('/:transaction_id', transactionsController.updateTransaction, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.transaction);

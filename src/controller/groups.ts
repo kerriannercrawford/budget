@@ -1,8 +1,9 @@
+import { GroupQuery } from '../../src/types/queries';
 import { GroupController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
 
 const db = require('../models/database');
-const queries = require('./queries/groups');
+const queries: GroupQuery = require('./queries/groups');
 
 const groupsController: GroupController = {};
 
@@ -44,6 +45,12 @@ groupsController.deleteGroup = async (req: ExpressReq, res: ExpressRes, next: Ex
 
   return next();
 };
+
+groupsController.getGroupNameById = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
+  const name = await db.query(queries.getGroupNameById, [req.params.group_id]);
+  res.locals.name = name.rows;
+  return next();
+}
 
 
 module.exports = groupsController;

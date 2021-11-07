@@ -1,8 +1,9 @@
+import { PayeeQuery } from '../../src/types/queries';
 import { PayeeController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
 
 const db = require('../models/database');
-const queries = require('./queries/payees');
+const queries: PayeeQuery = require('./queries/payees');
 
 const payeesController: PayeeController = {};
 
@@ -44,6 +45,11 @@ payeesController.deletePayee = async (req: ExpressReq, res: ExpressRes, next: Ex
   return next();
 };
 
+payeesController.getPayeeNameById = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
+  const name = await db.query(queries.getPayeeNameById, [req.params.payee_id]);
+  res.locals.name = name.rows;
+  return next();
+}
 
 module.exports = payeesController;
 export {};

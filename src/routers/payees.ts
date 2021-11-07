@@ -1,7 +1,8 @@
+import { PayeeController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/express';
 
 const express = require('express');
-const payeesController = require('../controller/payees');
+const payeesController: PayeeController = require('../controller/payees');
 
 const payeesRouter = express.Router();
 
@@ -16,6 +17,10 @@ payeesRouter.get('/:user_id', payeesController.getAllUserPayees, (req: ExpressRe
 payeesRouter.get('/:user_id/:payee_id', payeesController.getOneUserPayee, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.payee);
 });
+
+payeesRouter.get('/name/:payee_id', payeesController.getPayeeNameById, (req: ExpressReq, res: ExpressRes) => {
+  res.status(200).json(res.locals.name);
+})
 
 payeesRouter.patch('/:payee_id', payeesController.updatePayee, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.payee);

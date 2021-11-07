@@ -44,6 +44,10 @@ queries.updateGroup = async (body: RequestBody, groupId: string) => {
   };
 };
 
+queries.getGroupNameById = `
+SELECT name FROM groups
+WHERE _id=$1`;
+
 module.exports = queries;
 
 export {};

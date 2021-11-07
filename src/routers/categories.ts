@@ -1,7 +1,8 @@
+import { CategoryController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/express';
 
 const express = require('express');
-const categoriesController = require('../controller/categories');
+const categoriesController: CategoryController = require('../controller/categories');
 
 const categoriesRouter = express.Router();
 
@@ -16,6 +17,10 @@ categoriesRouter.get('/:user_id', categoriesController.getAllUserCategories, (re
 categoriesRouter.get('/:user_id/:category_id', categoriesController.getOneUserCategory, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.category);
 });
+
+categoriesRouter.get('/name/:category_id', categoriesController.getCategoryNameById, (req: ExpressReq, res: ExpressRes) => {
+  res.status(200).json(res.locals.name);
+})
 
 categoriesRouter.patch('/:category_id', categoriesController.updateCategory, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.category);

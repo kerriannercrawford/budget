@@ -1,7 +1,8 @@
+import { AccountController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/express';
 
 const express = require('express');
-const accountsController = require('../controller/accounts');
+const accountsController: AccountController = require('../controller/accounts');
 
 const accountsRouter = express.Router();
 
@@ -16,6 +17,10 @@ accountsRouter.get('/:user_id', accountsController.getAllUserAccounts, (req: Exp
 accountsRouter.get('/:user_id/:account_id', accountsController.getOneUserAccount, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.account);
 });
+
+accountsRouter.get('/name/:account_id', accountsController.getAccountNameById, (req: ExpressReq, res: ExpressRes) => {
+  res.status(200).json(res.locals.name);
+})
 
 accountsRouter.patch('/:account_id', accountsController.updateAccount, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.account);

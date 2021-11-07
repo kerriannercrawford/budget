@@ -1,8 +1,9 @@
+import { TransactionQuery } from '../../src/types/queries';
 import { TransactionController } from '../../src/types/controller';
 import { ExpressReq, ExpressRes, ExpressNext } from '../../src/types/express';
 
 const db = require('../models/database');
-const queries = require('./queries/transactions');
+const queries: TransactionQuery = require('./queries/transactions');
 
 const transactionsController: TransactionController = {};
 
@@ -53,6 +54,12 @@ transactionsController.deleteTransaction = async (req: ExpressReq, res: ExpressR
   const transaction = await db.query(queries.deleteTransaction, [req.params.transaction_id]);
   res.locals.transaction = transaction.rows;
 
+  return next();
+};
+
+transactionsController.getTransactionMemoById = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
+  const memo = await db.query(queries.getTransactionMemoById, [req.params.transaction_id]);
+  res.locals.memo = memo.rows;
   return next();
 };
 

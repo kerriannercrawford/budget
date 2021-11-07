@@ -1,8 +1,9 @@
+import { CategoryQuery } from '../../src/types/queries';
 import { CategoryController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
 
 const db = require('../models/database');
-const queries = require('./queries/categories');
+const queries: CategoryQuery = require('./queries/categories');
 
 const categoriesController: CategoryController = {};
 
@@ -44,6 +45,12 @@ categoriesController.deleteCategory = async (req: ExpressReq, res: ExpressRes, n
 
   return next();
 };
+
+categoriesController.getCategoryNameById = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
+  const name = await db.query(queries.getCategoryNameById, [req.params.category_id]);
+  res.locals.name = name.rows;
+  return next();
+}
 
 module.exports = categoriesController;
 export {};

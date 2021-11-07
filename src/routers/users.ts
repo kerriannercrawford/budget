@@ -1,7 +1,8 @@
+import { UserController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/express';
 
 const express = require('express');
-const usersController = require('../controller/users');
+const usersController: UserController = require('../controller/users');
 const usersRouter = express.Router();
 
 usersRouter.get('/', usersController.getAllUsers, (req: ExpressReq, res: ExpressRes) => {
@@ -11,6 +12,10 @@ usersRouter.get('/', usersController.getAllUsers, (req: ExpressReq, res: Express
 usersRouter.get('/:user_id', usersController.getUserById, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.user);
 });
+
+usersRouter.get('/username/:user_id', usersController.getUsernameById, (req: ExpressReq, res: ExpressRes) => {
+  res.status(200).json(res.locals.username);
+})
 
 usersRouter.post('/login', usersController.checkForUser, usersController.login, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.user);

@@ -1,8 +1,9 @@
+import { AccountQuery } from '../../src/types/queries';
 import { AccountController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
 
 const db = require('../models/database');
-const queries = require('./queries/accounts');
+const queries: AccountQuery = require('./queries/accounts');
 
 const accountsController: AccountController = {};
 
@@ -44,6 +45,12 @@ accountsController.deleteUserAccount = async (req: ExpressReq, res: ExpressRes, 
 
   return next();
 };
+
+accountsController.getAccountNameById = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
+  const name = await db.query(queries.getAccountNameById, [req.params.account_id]);
+  res.locals.name = name.rows;
+  return next();
+}
 
 module.exports = accountsController;
 export {};

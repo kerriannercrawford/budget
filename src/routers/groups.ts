@@ -1,7 +1,8 @@
+import { GroupController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/express';
 
 const express = require('express');
-const groupsController = require('../controller/groups');
+const groupsController: GroupController = require('../controller/groups');
 
 const groupsRouter = express.Router();
 
@@ -16,6 +17,10 @@ groupsRouter.get('/:user_id', groupsController.getAllUserGroups, (req: ExpressRe
 groupsRouter.get('/:user_id/:group_id', groupsController.getOneUserGroup, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.group);
 });
+
+groupsRouter.get('/name/:group_id', groupsController.getGroupNameById, (req: ExpressReq, res: ExpressRes) => {
+  res.status(200).json(res.locals.name)
+})
 
 groupsRouter.patch('/:group_id', groupsController.updateGroup, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.group);

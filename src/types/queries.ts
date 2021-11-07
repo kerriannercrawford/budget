@@ -5,6 +5,7 @@ export interface TransactionQuery {
   getOneUserTransaction?: string;
   updateTransaction?: QueryUpdateFunction;
   deleteTransaction?: string;
+  getTransactionMemoById?: string;
 }
 
 export interface AccountQuery {
@@ -13,6 +14,7 @@ export interface AccountQuery {
   getOneUserAccount?: string;
   updateAccount?: QueryUpdateFunction;
   deleteUserAccount?: string;
+  getAccountNameById?: string;
 }
 
 export interface CategoryQuery {
@@ -21,6 +23,7 @@ export interface CategoryQuery {
   getOneUserCategory?: string;
   updateCategory?: QueryUpdateFunction;
   deleteCategory?: string;
+  getCategoryNameById?: string;
 }
 
 export interface GroupQuery {
@@ -29,6 +32,7 @@ export interface GroupQuery {
   getOneUserGroup?: string;
   updateGroup?: QueryUpdateFunction;
   deleteGroup?: string;
+  getGroupNameById?: string;
 }
 
 export interface PayeeQuery {
@@ -37,6 +41,7 @@ export interface PayeeQuery {
   getOneUserPayee?: string;
   updatePayee?: QueryUpdateFunction;
   deletePayee?: string;
+  getPayeeNameById?: string;
 }
 
 export interface UserQuery {
@@ -47,6 +52,7 @@ export interface UserQuery {
   getUserById?: string;
   updateUser?: QueryUpdateFunction;
   deleteUser?: string;
+  getUsernameById?: string;
 }
 
 export type QueryUpdateFunction = (...args: any[]) => any;

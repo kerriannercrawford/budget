@@ -7,6 +7,7 @@ export interface TransactionController {
   getOneUserTransaction?: ExpressMiddlewareFunction;
   updateTransaction?: ExpressMiddlewareFunction;
   deleteTransaction?: ExpressMiddlewareFunction;
+  getTransactionMemoById?: ExpressMiddlewareFunction;
 }
 
 export interface AccountController {
@@ -15,6 +16,7 @@ export interface AccountController {
   getOneUserAccount?: ExpressMiddlewareFunction;
   updateAccount?: ExpressMiddlewareFunction;
   deleteUserAccount?: ExpressMiddlewareFunction;
+  getAccountNameById?: ExpressMiddlewareFunction;
 }
 
 export interface CategoryController {
@@ -23,6 +25,7 @@ export interface CategoryController {
   getOneUserCategory?: ExpressMiddlewareFunction;
   updateCategory?: ExpressMiddlewareFunction;
   deleteCategory?: ExpressMiddlewareFunction;
+  getCategoryNameById?: ExpressMiddlewareFunction;
 }
 
 export interface GroupController {
@@ -31,6 +34,7 @@ export interface GroupController {
   getOneUserGroup?: ExpressMiddlewareFunction;
   updateGroup?: ExpressMiddlewareFunction;
   deleteGroup?: ExpressMiddlewareFunction;
+  getGroupNameById?: ExpressMiddlewareFunction;
 }
 
 export interface PayeeController {
@@ -39,6 +43,7 @@ export interface PayeeController {
   getOneUserPayee?: ExpressMiddlewareFunction;
   updatePayee?: ExpressMiddlewareFunction;
   deletePayee?: ExpressMiddlewareFunction;
+  getPayeeNameById?: ExpressMiddlewareFunction
 }
 
 export interface UserController {
@@ -49,6 +54,7 @@ export interface UserController {
   getUserById?: ExpressMiddlewareFunction;
   updateUser?: ExpressMiddlewareFunction;
   deleteUser?: ExpressMiddlewareFunction;
+  getUsernameById?: ExpressMiddlewareFunction;
 }
 
 

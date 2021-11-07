@@ -6,7 +6,7 @@ export type ExpressNext = ExpressMiddlewareFunction;
 
 export type DeleteResponseMessage = {
   message: string,
-  account_id?: string,
+  accountId?: string,
   userId?: string,
   groupId?: string,
   payeeId?: string,

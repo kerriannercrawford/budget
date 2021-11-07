@@ -10,6 +10,6 @@ export type DeleteResponseMessage = {
   userId?: string,
   groupId?: string,
   payeeId?: string,
-  category_id?: string,
+  categoryId?: string,
   transaction_id?: string
 };

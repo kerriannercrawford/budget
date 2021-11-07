@@ -11,7 +11,17 @@ const validatePassword = async (password: string, hash: string): Promise<boolean
   return await bcrypt.compare(password, hash);
 };
 
+const YEAR_DEFAULT = () => {
+  return new Date().getFullYear();
+}
+
+const MONTH_DEFAULT = () => {
+  return (new Date().getMonth() + 1)
+}
+
 module.exports = {
   encryptPassword,
-  validatePassword
+  validatePassword,
+  YEAR_DEFAULT,
+  MONTH_DEFAULT
 };

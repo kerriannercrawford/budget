@@ -1,16 +1,13 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-
-const YEAR_DEFAULT = () => {
-  return new Date().getFullYear();
-}
-
-const MONTH_DEFAULT = () => {
-  return (new Date().getMonth() + 1)
-}
+const { YEAR_DEFAULT, MONTH_DEFAULT } = require('../util/util');
 
 const GroupSchema = new Schema({
-  name: { type: { userId: String, groupName: String }, required: true },
+  name: { 
+    type: { userId: String, groupName: String }, 
+    required: true, 
+    unique: true 
+  },
   categories: { type: [ String ], default: [] },
   userId: { type: String, required: true },
   year: { type: Number, default: YEAR_DEFAULT()},

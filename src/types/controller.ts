@@ -8,6 +8,9 @@ export interface TransactionController {
   updateTransaction?: ExpressMiddlewareFunction;
   deleteTransaction?: ExpressMiddlewareFunction;
   getTransactionMemoById?: ExpressMiddlewareFunction;
+  updateCategoryBalance?: ExpressMiddlewareFunction;
+  updateAccountBalance?: ExpressMiddlewareFunction;
+  updateGroupBalance?: ExpressMiddlewareFunction;
 }
 
 export interface AccountController {

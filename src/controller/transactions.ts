@@ -21,6 +21,30 @@ transactionsController.createTransaction = async (req: ExpressReq, res: ExpressR
   return next();
 };
 
+transactionsController.updateCategoryBalance = (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
+  // Get Category - assigned / activity / available 
+  // Get inflow and / or outflow from req.body 
+  // Mathhhhhh
+  // Update Category
+  return next();
+};
+
+transactionsController.updateGroupBalance = (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
+  // Get Group - assigned / activity / available
+  // Get inflow and / or outflow from req.body
+  // Mathhhhhh
+  // Update Group
+  return next();
+};
+
+transactionsController.updateAccountBalance = (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
+  // Get Account - cleared/uncleared 
+  // Get inflow and / or outflow as well as cleared from req.body
+  // Mathhhhhhh
+  // Update Account
+  return next();
+};
+
 transactionsController.getAllUserTransactions = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
   const foundTransactions = await transactions.find({ userId: req.params.userId });
   checkResult(foundTransactions, next, 'Error: Unable to locate transactions');

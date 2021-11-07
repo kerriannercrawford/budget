@@ -8,7 +8,7 @@ const TYPE = 'transaction';
 
 const transactionsRouter = express.Router();
 
-transactionsRouter.post('/', transactionsController.createTransaction, (req: ExpressReq, res: ExpressRes) => {
+transactionsRouter.post('/', transactionsController.createTransaction, transactionsController.updateCategoryBalance, transactionsController.updateGroupBalance, transactionsController.updateAccountBalance, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.transaction);
 });
 
@@ -24,7 +24,7 @@ transactionsRouter.get('/transaction/:transactionId', transactionsController.get
   res.status(200).json(res.locals.transaction);
 });
 
-transactionsRouter.patch('/:transactionId', transactionsController.updateTransaction, (req: ExpressReq, res: ExpressRes) => {
+transactionsRouter.patch('/:transactionId', transactionsController.updateTransaction, transactionsController.updateCategoryBalance, transactionsController.updateGroupBalance, transactionsController.updateAccountBalance, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.transaction);
 });
 

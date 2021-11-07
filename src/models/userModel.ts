@@ -11,7 +11,7 @@ const UserSchema = new Schema({
   startDate: { type: Date, default: new Date() }
 })
 
-const userModel = mongoose.model('budget', UserSchema);
+const userModel = mongoose.model('users', UserSchema);
 
 module.exports = userModel;
 export {}

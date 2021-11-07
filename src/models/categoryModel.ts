@@ -21,7 +21,7 @@ const CategorySchema = new Schema({
   }
 })
 
-const categoryModel = mongoose.model('budget', CategorySchema);
+const categoryModel = mongoose.model('categories', CategorySchema);
 
 module.exports = categoryModel;
 export {}

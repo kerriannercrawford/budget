@@ -11,7 +11,7 @@ const PayeeSchema = new Schema({
   ]
 })
 
-const payeeModel = mongoose.model('budget', PayeeSchema);
+const payeeModel = mongoose.model('payees', PayeeSchema);
 
 module.exports = payeeModel;
 export {}

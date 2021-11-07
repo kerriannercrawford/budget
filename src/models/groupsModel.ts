@@ -21,7 +21,7 @@ const GroupSchema = new Schema({
   }
 })
 
-const groupModel = mongoose.model('budget', GroupSchema);
+const groupModel = mongoose.model('groups', GroupSchema);
 
 module.exports = groupModel;
 export {}

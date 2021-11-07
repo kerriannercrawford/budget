@@ -13,7 +13,7 @@ const TransactionsSchema = new Schema({
   cleared: Boolean
 })
 
-const transactionModel = mongoose.model('budget', TransactionsSchema);
+const transactionModel = mongoose.model('transactions', TransactionsSchema);
 
 module.exports = transactionModel;
 export {}

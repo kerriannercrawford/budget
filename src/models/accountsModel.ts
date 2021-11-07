@@ -13,7 +13,7 @@ const accountSchema = new Schema({
   ]
 })
 
-const accountModel = mongoose.model('budget', accountSchema);
+const accountModel = mongoose.model('accounts', accountSchema);
 
 module.exports = accountModel;
 export {}

@@ -13,9 +13,9 @@ usersRouter.get('/:user_id', usersController.getUserById, (req: ExpressReq, res:
   res.status(200).json(res.locals.user);
 });
 
-usersRouter.get('/username/:user_id', usersController.getUsernameById, (req: ExpressReq, res: ExpressRes) => {
-  res.status(200).json(res.locals.username);
-})
+// usersRouter.get('/username/:user_id', usersController.getUsernameById, (req: ExpressReq, res: ExpressRes) => {
+//   res.status(200).json(res.locals.username);
+// })
 
 usersRouter.post('/login', usersController.checkForUser, usersController.login, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.user);

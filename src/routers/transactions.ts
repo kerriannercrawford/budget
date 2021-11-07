@@ -3,6 +3,8 @@ import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/e
 
 const express = require('express');
 const transactionsController: TransactionController = require('../controller/transactions');
+const { deleteResponseMessage } = require('../util/util');
+const TYPE = 'transaction';
 
 const transactionsRouter = express.Router();
 
@@ -27,11 +29,7 @@ transactionsRouter.patch('/:transactionId', transactionsController.updateTransac
 });
 
 transactionsRouter.delete('/:transactionId', transactionsController.deleteTransaction, (req: ExpressReq, res: ExpressRes) => {
-  const returnMsg: DeleteResponseMessage = {
-    message: `Deletion of transaction id ${req.params.transactionId} was successful`
-  };
-  returnMsg.transactionId = req.params.transactionId;
-  res.status(200).json(returnMsg);
+  res.status(200).json(deleteResponseMessage(TYPE, req.params.transactionId));
 });
 
 module.exports = transactionsRouter;

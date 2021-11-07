@@ -3,6 +3,8 @@ import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/e
 
 const express = require('express');
 const accountsController: AccountController = require('../controller/accounts');
+const { deleteResponseMessage } = require('../util/util');
+const TYPE = 'account'
 
 const accountsRouter = express.Router();
 
@@ -23,11 +25,7 @@ accountsRouter.patch('/:accountId', accountsController.updateAccount, (req: Expr
 });
 
 accountsRouter.delete('/:accountId', accountsController.deleteUserAccount, (req: ExpressReq, res: ExpressRes) => {
-  const returnMsg: DeleteResponseMessage = {
-    message: `Deletion of account id ${req.params.accountId} was successful`
-  };
-  returnMsg.accountId = req.params.accountId;
-  res.status(200).json(returnMsg);
+  res.status(200).json(deleteResponseMessage(TYPE, req.params.accountId));
 });
 
 module.exports = accountsRouter;

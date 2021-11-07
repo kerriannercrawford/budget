@@ -3,6 +3,8 @@ import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/e
 
 const express = require('express');
 const groupsController: GroupController = require('../controller/groups');
+const { deleteResponseMessage } = require('../util/util');
+const TYPE = 'group';
 
 const groupsRouter = express.Router();
 
@@ -23,11 +25,7 @@ groupsRouter.patch('/:groupId', groupsController.updateGroup, (req: ExpressReq, 
 });
 
 groupsRouter.delete('/:groupId', groupsController.deleteGroup, (req: ExpressReq, res: ExpressRes) => {
-  const returnMsg: DeleteResponseMessage = {
-    message: `Deletion of group id ${req.params.groupId} was successful`
-  };
-  returnMsg.groupId = req.params.groupId;
-  res.status(200).json(returnMsg);
+  res.status(200).json(deleteResponseMessage(TYPE, req.params.groupId));
 });
 
 module.exports = groupsRouter;

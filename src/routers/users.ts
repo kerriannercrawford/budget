@@ -3,6 +3,9 @@ import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/e
 
 const express = require('express');
 const usersController: UserController = require('../controller/users');
+const { deleteResponseMessage } = require('../util/util');
+const TYPE = 'transaction';
+
 const usersRouter = express.Router();
 
 usersRouter.get('/', usersController.getAllUsers, (req: ExpressReq, res: ExpressRes) => {
@@ -12,10 +15,6 @@ usersRouter.get('/', usersController.getAllUsers, (req: ExpressReq, res: Express
 usersRouter.get('/:userId', usersController.getUserById, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.user);
 });
-
-// usersRouter.get('/username/:user_id', usersController.getUsernameById, (req: ExpressReq, res: ExpressRes) => {
-//   res.status(200).json(res.locals.username);
-// })
 
 usersRouter.post('/login', usersController.checkForUser, usersController.login, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.user);
@@ -34,7 +33,7 @@ usersRouter.delete('/:userId', usersController.deleteUser, (req: ExpressReq, res
     message: `Deletion of user id ${req.params.userId} was successful`
   };
   returnMsg.userId = req.params.userId;
-  res.status(200).json(returnMsg);
+  res.status(200).json(deleteResponseMessage(TYPE, req.params.userId));
 });
 
 module.exports = usersRouter;

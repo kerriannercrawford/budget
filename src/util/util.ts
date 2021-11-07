@@ -1,3 +1,5 @@
+import { DeleteResponseMessage, ExpressNext } from '../types/express';
+
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
@@ -19,9 +21,29 @@ const MONTH_DEFAULT = () => {
   return (new Date().getMonth() + 1)
 }
 
+const checkResult = (responseObject: any, next: ExpressNext, errorMessage: string) => {
+  if (!responseObject) {
+    return next({
+      log: errorMessage,
+      message: {
+        err: errorMessage
+      }
+    })
+  }
+}
+
+const deleteResponseMessage = (type: string, id: string): DeleteResponseMessage => {
+  const idKey = `${type}Id`;
+  return {
+    [idKey]: id,
+    message: `Deletion of ${type} id ${id} was successful`
+  }
+}
+
 module.exports = {
   encryptPassword,
   validatePassword,
   YEAR_DEFAULT,
-  MONTH_DEFAULT
+  MONTH_DEFAULT,
+  checkResult
 };

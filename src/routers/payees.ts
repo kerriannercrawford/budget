@@ -3,6 +3,8 @@ import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/e
 
 const express = require('express');
 const payeesController: PayeeController = require('../controller/payees');
+const { deleteResponseMessage } = require('../util/util');
+const TYPE = 'payee';
 
 const payeesRouter = express.Router();
 
@@ -23,11 +25,7 @@ payeesRouter.patch('/:payeeId', payeesController.updatePayee, (req: ExpressReq, 
 });
 
 payeesRouter.delete('/:payeeId', payeesController.deletePayee, (req: ExpressReq, res: ExpressRes) => {
-  const returnMsg: DeleteResponseMessage = {
-    message: `Deletion of payee id ${req.params.payeeId} was successful`
-  };
-  returnMsg.payeeId = req.params.payeeId;
-  res.status(200).json(returnMsg);
+  res.status(200).json(deleteResponseMessage(TYPE, req.params.payeeId));
 });
 
 module.exports = payeesRouter;

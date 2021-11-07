@@ -10,27 +10,23 @@ groupsRouter.post('/', groupsController.createGroup, (req: ExpressReq, res: Expr
   res.status(200).json(res.locals.group);
 });
 
-groupsRouter.get('/:user_id', groupsController.getAllUserGroups, (req: ExpressReq, res: ExpressRes) => {
+groupsRouter.get('/user/:userId', groupsController.getAllUserGroups, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.groups);
 });
 
-groupsRouter.get('/:user_id/:group_id', groupsController.getOneUserGroup, (req: ExpressReq, res: ExpressRes) => {
+groupsRouter.get('/group/:groupId', groupsController.getOneUserGroup, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.group);
 });
 
-groupsRouter.get('/name/:group_id', groupsController.getGroupNameById, (req: ExpressReq, res: ExpressRes) => {
-  res.status(200).json(res.locals.name)
-})
-
-groupsRouter.patch('/:group_id', groupsController.updateGroup, (req: ExpressReq, res: ExpressRes) => {
+groupsRouter.patch('/:groupId', groupsController.updateGroup, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.group);
 });
 
-groupsRouter.delete('/:group_id', groupsController.deleteGroup, (req: ExpressReq, res: ExpressRes) => {
+groupsRouter.delete('/:groupId', groupsController.deleteGroup, (req: ExpressReq, res: ExpressRes) => {
   const returnMsg: DeleteResponseMessage = {
-    message: `Deletion of group id ${req.params.group_id} was successful`
+    message: `Deletion of group id ${req.params.groupId} was successful`
   };
-  returnMsg.group_id = req.params.group_id;
+  returnMsg.groupId = req.params.groupId;
   res.status(200).json(returnMsg);
 });
 

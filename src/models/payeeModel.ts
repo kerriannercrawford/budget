@@ -2,13 +2,12 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const PayeeSchema = new Schema({
-  payees: [
-    {
-      id: { type: String, required: true, unique: true },
-      name: String,
-      lastCategory: String
-    }
-  ]
+  name: { type: {
+    payeeName: String,
+    userId: String
+  }, required: true, unique: true },
+  lastCategory: String,
+  userId: { type: String, required: true }
 })
 
 const payeeModel = mongoose.model('payees', PayeeSchema);

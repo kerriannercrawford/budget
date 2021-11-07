@@ -15,12 +15,7 @@ usersController.createUser = async (req: ExpressReq, res: ExpressRes, next: Expr
     username,
     password: hash,
     firstName,
-    lastName,
-    accountsId: [],
-    categoriesId: [],
-    groupsId: [],
-    payeesId: [],
-    transactions: []
+    lastName
    })
    res.locals.user = createdUser;
   return next();
@@ -54,7 +49,7 @@ usersController.login = async (req: ExpressReq, res: ExpressRes, next: ExpressNe
 };
 
 usersController.getAllUsers = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const users = await user.find();
+  const users = await user.find({});
   if (!users) {
     return next({
       log: 'Error: unable to load users',

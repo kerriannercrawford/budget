@@ -8,8 +8,8 @@ export type DeleteResponseMessage = {
   message: string,
   account_id?: string,
   userId?: string,
-  group_id?: string,
-  payee_id?: string,
+  groupId?: string,
+  payeeId?: string,
   category_id?: string,
   transaction_id?: string
 };

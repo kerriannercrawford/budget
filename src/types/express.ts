@@ -6,10 +6,10 @@ export type ExpressNext = ExpressMiddlewareFunction;
 
 export type DeleteResponseMessage = {
   message: string,
-  account_id?: string,
-  user_id?: string,
-  group_id?: string,
-  payee_id?: string,
-  category_id?: string,
-  transaction_id?: string
+  accountId?: string,
+  userId?: string,
+  groupId?: string,
+  payeeId?: string,
+  categoryId?: string,
+  transactionId?: string
 };

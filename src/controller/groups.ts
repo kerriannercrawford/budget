@@ -1,56 +1,99 @@
-import { GroupQuery } from '../../src/types/queries';
 import { GroupController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
 
-const db = require('../models/database');
-const queries: GroupQuery = require('./queries/groups');
+const groups = require('../models/groupsModel');
 
 const groupsController: GroupController = {};
 
 groupsController.createGroup = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const { user_id, name } = req.body;
-  const values = [user_id, name];
-  const group = await db.query(queries.createGroup, values);
-  res.locals.group = group.rows;
-
+  const { groupName, userId } = req.body;
+  const createdGroup = await groups.create({
+    name: {
+      userId,
+      groupName
+    },
+    userId
+  })
+  if (!createdGroup) {
+    return next({
+      log: 'Error: Unable to create group',
+      message: {
+        err: 'Error: Unable to create group'
+      }
+    })
+  }
+  res.locals.group = createdGroup;
   return next();
 };
 
 groupsController.getAllUserGroups = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const groups = await db.query(queries.getAllUserGroups, [req.params.user_id]);
-  res.locals.groups = groups.rows;
-
+  const foundGroups = await groups.find({ userId: req.params.userId });
+  if (!foundGroups) {
+    return next({
+      log: 'Error: Unable to locate groups',
+      message: {
+        err: 'Error: Unable to locate groups'
+      }
+    })
+  }
+  res.locals.groups = foundGroups;
   return next();
 };
 
 groupsController.getOneUserGroup = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const { user_id, group_id } = req.params;
-  const group = await db.query(queries.getOneUserGroup, [user_id, group_id]);
-  res.locals.group = group.rows;
-
+  const foundGroup = await groups.find({ _id: req.params.groupId })
+  if (!foundGroup) {
+    return next({
+      log: 'Error: Unable to locate group with that id',
+      message: {
+        err: 'Error: Unable to locate group with that id'
+      }
+    })
+  }
+  res.locals.group = foundGroup;
   return next();
 };
 
 groupsController.updateGroup = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const { queryString, values } = await queries.updateGroup(req.body, req.params.group_id);
-  const group = await db.query(queryString, values);
-  res.locals.group = group.rows;
-
+  const query = { _id: req.params.groupId };
+  const { groupName, userId } = req.body;
+  const updatedGroup = await groups.findOneAndUpdate(
+    query, 
+    {
+      name: {
+        userId,
+        groupName
+      },
+      userId
+    }, 
+    { 
+      new: true 
+    });
+  if (!updatedGroup) {
+    return next({
+      log: 'Error: Unable to update group',
+      message: {
+        err: 'Error: Unable to update group'
+      }
+    })
+  }
+  res.locals.group = updatedGroup;
   return next();
 };
 
 groupsController.deleteGroup = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const group = await db.query(queries.deleteGroup, [req.params.group_id]);
-  res.locals.group = group.rows;
-
+  const deletedGroup = await groups.findOneAndDelete({ _id: req.params.groupId })
+  if (!deletedGroup) {
+    return next({
+      log: 'Error: Unable to delete group',
+      message: {
+        err: 'Error: Unable to delete group'
+      }
+    })
+  }
+  res.locals.group = deletedGroup;
   return next();
 };
-
-groupsController.getGroupNameById = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const name = await db.query(queries.getGroupNameById, [req.params.group_id]);
-  res.locals.name = name.rows;
-  return next();
-}
 
 
 module.exports = groupsController;

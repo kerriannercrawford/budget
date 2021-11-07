@@ -10,27 +10,23 @@ accountsRouter.post('/', accountsController.createAccount, (req: ExpressReq, res
   res.status(200).json(res.locals.account);
 });
 
-accountsRouter.get('/:user_id', accountsController.getAllUserAccounts, (req: ExpressReq, res: ExpressRes) => {
+accountsRouter.get('/user/:userId', accountsController.getAllUserAccounts, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.accounts);
 });
 
-accountsRouter.get('/:user_id/:account_id', accountsController.getOneUserAccount, (req: ExpressReq, res: ExpressRes) => {
+accountsRouter.get('/account/:accountId', accountsController.getOneUserAccount, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.account);
 });
 
-accountsRouter.get('/name/:account_id', accountsController.getAccountNameById, (req: ExpressReq, res: ExpressRes) => {
-  res.status(200).json(res.locals.name);
-})
-
-accountsRouter.patch('/:account_id', accountsController.updateAccount, (req: ExpressReq, res: ExpressRes) => {
+accountsRouter.patch('/:accountId', accountsController.updateAccount, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.account);
 });
 
-accountsRouter.delete('/:account_id', accountsController.deleteUserAccount, (req: ExpressReq, res: ExpressRes) => {
+accountsRouter.delete('/:accountId', accountsController.deleteUserAccount, (req: ExpressReq, res: ExpressRes) => {
   const returnMsg: DeleteResponseMessage = {
-    message: `Deletion of account id ${req.params.account_id} was successful`
+    message: `Deletion of account id ${req.params.accountId} was successful`
   };
-  returnMsg.account_id = req.params.account_id;
+  returnMsg.accountId = req.params.accountId;
   res.status(200).json(returnMsg);
 });
 

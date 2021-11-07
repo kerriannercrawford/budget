@@ -1,78 +1,107 @@
 import { UserController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
 
-const db = require('../models/database');
-const queries = require('./queries/users');
+const user = require('../models/userModel');
 const util = require('../util/util');
 
 const usersController: UserController = {};
 
 usersController.createUser = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const { username, email, firstName, lastName } = req.body;
-  const password = await util.encryptPassword(req.body.password);
-
-  const values = [username, password, email, firstName, lastName];
-
-  const createResults = await db.query(queries.createUser, values);
-  res.locals.user = createResults.rows;
-
+  const { budgetName, email, username, password, firstName, lastName } = req.body;
+  const hash = await util.encryptPassword(password);
+  const createdUser = await user.create({ 
+    budgetName,
+    email,
+    username,
+    password: hash,
+    firstName,
+    lastName
+   })
+   res.locals.user = createdUser;
   return next();
 };
 
 usersController.checkForUser = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const userResults = await db.query(queries.login, [req.body.username]);
-  if (!userResults || !userResults.rows) {
+  const foundUser = await user.findOne({ username: req.body.username });
+  if (!foundUser) {
     return next({
-      log: 'Error in Check For User: user does not exist',
+      log: 'Error: User does not exist',
       message: {
-        err: 'user does not exist'
+        err: 'Error: Unable to log in, user does not exist'
       }
-    });
+    })
   }
-  res.locals.user = userResults.rows;
-
+  res.locals.user = foundUser;
   return next();
 };
 
 usersController.login = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const correctPassword = await util.validatePassword(req.body.password, res.locals.user[0].password);
+  const correctPassword = await util.validatePassword(req.body.password, res.locals.user.password);
   if (!correctPassword) {
     return next({
       log: 'Error logging in, username or password does not match',
       message: {
         err: 'username or password does not match'
       }
-    });
+    })
   }
-
   return next();
 };
 
 usersController.getAllUsers = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const users = await db.query(queries.getAllUsers);
-  res.locals.users = users.rows;
-
+  const users = await user.find({});
+  if (!users) {
+    return next({
+      log: 'Error: unable to load users',
+      message: {
+        err: 'Error: unable to load users'
+      }
+    })
+  }
+  res.locals.users = users;
   return next();
 };
 
 usersController.getUserById = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const user = await db.query(queries.getUserById, [req.params.user_id]);
-  res.locals.user = user.rows;
-
+  const foundUser = await user.findById(req.params.userId);
+  if (!foundUser) {
+    return next({
+      log: 'Error: invalid user id',
+      message: {
+        err: 'Error: Invalid user id'
+      }
+    })
+  }
+  res.locals.user = foundUser;
   return next();
 };
 
 usersController.updateUser = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const { queryString, values } = await queries.updateUser(req.body, req.params.user_id);
-  const updatedUser = await db.query(queryString, values);
-  res.locals.user = updatedUser.rows;
-
+  const query = { _id: req.params.userId }
+  const updatedUser = await user.findOneAndUpdate(query, req.body, { new: true });
+  if (!updatedUser) {
+    return next({
+      log: 'Error: unable to update user',
+      message: {
+        err: 'Error: unable to update user'
+      }
+    })
+  }
+  res.locals.user = updatedUser;
   return next();
 };
 
 usersController.deleteUser = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const user = await db.query(queries.deleteUser, [req.params.user_id]);
-
+  const deletedUser = await user.findOneAndDelete({ _id: req.params.userId });
+  if (!deletedUser) {
+    return next({
+      log: 'Error: unable to delete user',
+      message: {
+        err: 'Error: unable to delete user'
+      }
+    })
+  }
+  res.locals.user = deletedUser;
   return next();
 };
 

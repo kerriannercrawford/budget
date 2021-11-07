@@ -9,13 +9,13 @@ usersRouter.get('/', usersController.getAllUsers, (req: ExpressReq, res: Express
   res.status(200).json(res.locals.users);
 });
 
-usersRouter.get('/:user_id', usersController.getUserById, (req: ExpressReq, res: ExpressRes) => {
+usersRouter.get('/:userId', usersController.getUserById, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.user);
 });
 
-usersRouter.get('/username/:user_id', usersController.getUsernameById, (req: ExpressReq, res: ExpressRes) => {
-  res.status(200).json(res.locals.username);
-})
+// usersRouter.get('/username/:user_id', usersController.getUsernameById, (req: ExpressReq, res: ExpressRes) => {
+//   res.status(200).json(res.locals.username);
+// })
 
 usersRouter.post('/login', usersController.checkForUser, usersController.login, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.user);
@@ -25,15 +25,15 @@ usersRouter.post('/create', usersController.createUser, (req: ExpressReq, res: E
   res.status(200).json(res.locals.user);
 });
 
-usersRouter.patch('/:user_id', usersController.updateUser, (req: ExpressReq, res: ExpressRes) => {
+usersRouter.patch('/:userId', usersController.updateUser, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.user);
 });
 
-usersRouter.delete('/:user_id', (req: ExpressReq, res: ExpressRes) => {
+usersRouter.delete('/:userId', usersController.deleteUser, (req: ExpressReq, res: ExpressRes) => {
   const returnMsg: DeleteResponseMessage = {
-    message: `Deletion of user id ${req.params.user_id} was successful`
+    message: `Deletion of user id ${req.params.userId} was successful`
   };
-  returnMsg.user_id = req.params.user_id;
+  returnMsg.userId = req.params.userId;
   res.status(200).json(returnMsg);
 });
 

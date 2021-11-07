@@ -1,4 +1,3 @@
-import { TransactionQuery } from '../../src/types/queries';
 import { TransactionController } from '../../src/types/controller';
 import { ExpressReq, ExpressRes, ExpressNext } from '../../src/types/express';
 

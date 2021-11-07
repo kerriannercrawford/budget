@@ -1,4 +1,3 @@
-import { CategoryQuery } from '../../src/types/queries';
 import { CategoryController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
 

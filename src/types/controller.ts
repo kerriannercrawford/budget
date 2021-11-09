@@ -60,5 +60,7 @@ export interface UserController {
   getUsernameById?: ExpressMiddlewareFunction;
 }
 
+export type SessionController = any;
+
 
 

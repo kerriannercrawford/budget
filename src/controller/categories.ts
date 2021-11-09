@@ -7,14 +7,15 @@ const { checkResult } = require('../util/util');
 const categoriesController: CategoryController = {};
 
 categoriesController.createCategory = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const { userId, groupId, categoryName } = req.body;
+  const { userId, groupId, categoryName, note } = req.body;
   const createdCategory = await categories.create({
     name: {
       userId,
       categoryName
     },
     groupId,
-    userId
+    userId,
+    note
   });
   checkResult(createdCategory, next, 'Error: Unable to create category')
   res.locals.category = createdCategory;

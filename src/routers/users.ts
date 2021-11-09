@@ -1,8 +1,9 @@
-import { UserController } from '../../src/types/controller';
+import { SessionController, UserController } from '../../src/types/controller';
 import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/express';
 
 const express = require('express');
 const usersController: UserController = require('../controller/users');
+const sessionController: SessionController = require('../controller/session');
 const { deleteResponseMessage } = require('../util/util');
 const TYPE = 'transaction';
 
@@ -16,11 +17,11 @@ usersRouter.get('/:userId', usersController.getUserById, (req: ExpressReq, res: 
   res.status(200).json(res.locals.user);
 });
 
-usersRouter.post('/login', usersController.checkForUser, usersController.login, (req: ExpressReq, res: ExpressRes) => {
+usersRouter.post('/login', sessionController.checkForSession, usersController.checkForUser, usersController.login, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.user);
 });
 
-usersRouter.post('/create', usersController.createUser, (req: ExpressReq, res: ExpressRes) => {
+usersRouter.post('/create', usersController.createUser, sessionController.createSSID, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.user);
 });
 

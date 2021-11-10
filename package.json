@@ -8,7 +8,7 @@
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node dist/index.js",
-    "watch": "tsc -w & nodemon -q -w dist dist/index.js",
+    "watch": "tsc -w & webpack -w & nodemon -q -w dist -w /src/public dist/index.js",
     "test": "jest",
     "webpack": "webpack"
   },

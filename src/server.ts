@@ -10,10 +10,10 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', apiRouter);
+app.use('/public', express.static(path.join(__dirname, '../src/public')));
 
 app.get('/', (req: ExpressReq, res: ExpressRes) => {
   res.sendFile(path.join(__dirname, '../src/public/index.html'));

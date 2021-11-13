@@ -65,5 +65,7 @@ module.exports = {
   YEAR_DEFAULT,
   MONTH_DEFAULT,
   checkResult,
-  updateBalance
+  updateBalance,
+  getYear,
+  getMonth
 };

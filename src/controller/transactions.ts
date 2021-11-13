@@ -1,5 +1,7 @@
 import { TransactionController } from '../../src/types/controller';
 import { ExpressReq, ExpressRes, ExpressNext } from '../../src/types/express';
+import { TransactionInformation } from '../../src/types/transactions';
+import { AccountUpdate } from '../../src/types/accounts';
 
 const transactions = require('../models/transactionsModel');
 const categories = require('../models/categoryModel');
@@ -13,7 +15,7 @@ const transactionsController: TransactionController = {};
 transactionsController.createTransaction = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
   const { accountId, groupId, categoryId, payeeId, userId, outflow, inflow, memo, cleared, date } = req.body;
 
-  const transactionInformation: any = {
+  const transactionInformation: TransactionInformation = {
     accountId,
     groupId,
     categoryId,
@@ -108,7 +110,7 @@ transactionsController.updateAccountBalance = async (req: ExpressReq, res: Expre
     month
   });
 
-  const accountUpdate: any = {};
+  const accountUpdate: AccountUpdate = {};
 
   if (cleared) {
     accountUpdate.clearedBalance = updateBalance(inflow, outflow, account.clearedBalance)

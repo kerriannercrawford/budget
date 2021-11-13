@@ -67,5 +67,6 @@ module.exports = {
   checkResult,
   updateBalance,
   getYear,
-  getMonth
+  getMonth,
+  deleteResponseMessage
 };

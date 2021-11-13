@@ -21,6 +21,14 @@ const MONTH_DEFAULT = () => {
   return (new Date().getMonth() + 1)
 }
 
+const getYear = (date: string) => {
+  return new Date(date).getFullYear();
+}
+
+const getMonth = (date: string) => {
+  return (new Date(date).getMonth() + 1);
+}
+
 const checkResult = (responseObject: any, next: ExpressNext, errorMessage: string) => {
   if (!responseObject) {
     return next({
@@ -40,10 +48,22 @@ const deleteResponseMessage = (type: string, id: string): DeleteResponseMessage 
   }
 }
 
+const updateBalance = (inflow: number, outflow: number, balance: number ) => {
+  let newBalance = balance;
+  if (inflow) {
+    newBalance += inflow;
+  }
+  if (outflow) {
+    newBalance -= outflow;
+  }
+  return newBalance
+}
+
 module.exports = {
   encryptPassword,
   validatePassword,
   YEAR_DEFAULT,
   MONTH_DEFAULT,
-  checkResult
+  checkResult,
+  updateBalance
 };

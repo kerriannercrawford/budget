@@ -1,39 +1,36 @@
+require('dotenv').config();
 import { ExpressRes, ExpressReq, ExpressNext } from '../src/types/express';
 
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const apiRouter = require('./routers/api');
-require('dotenv').config();
+const dev = process.env.NODE_ENV !== 'production';
+const mongoose = require('mongoose');
+const next = require('next');
+const app = next({ dev });
+const handle = app.getRequestHandler();
+const PORT = 3000;
 
-const app = express();
+app.prepare().then(() => {
+  const server = express();
 
-app.use(express.json());
-app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
+  server.use(express.json());
+  server.use(cookieParser());
+  server.use(express.urlencoded({ extended: true }));
 
-app.use('/api', apiRouter);
-app.use('/public', express.static(path.join(__dirname, '../src/public')));
+  server.use('/api', apiRouter);
 
-app.get('/', (req: ExpressReq, res: ExpressRes) => {
-  res.sendFile(path.join(__dirname, '../src/public/index.html'));
+  server.get('*', (req: any, res: any) => {
+    return handle(req, res)
+  });
+
+  mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }).then(() => {
+    server.listen(PORT, () => {
+      console.log(`Server started on port ${PORT}`);
+    });
+  }).catch((e: any) => console.log(e));
 });
-
-app.use('*', (req: ExpressReq, res: ExpressRes) => {
-  res.status(404).json({});
-});
-
-app.use((err: any, req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  const defaultErr = {
-    log: 'Express error handler caught unknown middleware error',
-    status: 500,
-    message: { err: 'An error occurred' },
-  };
-
-  const errObj = Object.assign({}, defaultErr, err);
-
-  return res.status(errObj.status).json(errObj.message);
-});
-
-module.exports = app;
-export {};

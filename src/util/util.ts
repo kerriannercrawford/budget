@@ -3,7 +3,7 @@ import { DeleteResponseMessage, ExpressNext } from '../types/express';
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
-const  { SALT_ROUNDS } = process.env;
+const  SALT_ROUNDS = process.env.SALT_ROUNDS;
 
 const encryptPassword = async (password: string): Promise<string> => {
   return await bcrypt.hash(password, Number(SALT_ROUNDS));

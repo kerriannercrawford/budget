@@ -1,17 +1,18 @@
-import type { NextPage } from 'next'
-import Layout from '../components/Layout';
-import Head from 'next/head';
+import AppLayout from '../components/layouts/AppLayout';
+import BudgetLayout from '../components/layouts/BudgetLayout';
 import Image from 'next/image';
 import Container from '@mui/material/Container';
 
-const Home: NextPage = () => {
+export default function Home() {
   return (
-    <Layout>
-      <Container>
-        <h1>Welcome to your budget</h1>
-      </Container>
-    </Layout>
+    <h1>Welcome to your budget</h1>
   )
 }
 
-export default Home;
+Home.getLayout = function getLayout(page: any) {
+  return (
+    <AppLayout>
+      <BudgetLayout>{page}</BudgetLayout>
+    </AppLayout>
+  )
+}

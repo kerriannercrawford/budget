@@ -10,7 +10,8 @@ import theme from '../styles/theme';
 const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp({ Component, pageProps, emotionCache = clientSideEmotionCache }: any) {
-  return (
+  const getLayout = Component.getLayout || ((page: any) => page)
+  return getLayout(
     <CacheProvider value={emotionCache}>
       <Head>
         <title>budget</title>

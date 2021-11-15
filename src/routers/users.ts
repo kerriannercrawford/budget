@@ -17,7 +17,7 @@ usersRouter.get('/:userId', usersController.getUserById, (req: ExpressReq, res: 
   res.status(200).json(res.locals.user);
 });
 
-usersRouter.post('/login', sessionController.checkForSession, usersController.checkForUser, usersController.login, (req: ExpressReq, res: ExpressRes) => {
+usersRouter.post('/login', usersController.checkForUser, usersController.login, (req: ExpressReq, res: ExpressRes) => {
   res.status(200).json(res.locals.user);
 });
 

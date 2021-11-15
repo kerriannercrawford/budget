@@ -1,6 +1,3 @@
-require('dotenv').config();
-import { ExpressRes, ExpressReq, ExpressNext } from '../src/types/express';
-
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -32,5 +29,7 @@ app.prepare().then(() => {
     server.listen(PORT, () => {
       console.log(`Server started on port ${PORT}`);
     });
-  }).catch((e: any) => console.log(e));
+  }).catch((e: any) => console.log(JSON.stringify(e)));
 });
+
+export {}

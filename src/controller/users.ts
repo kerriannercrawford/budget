@@ -23,9 +23,6 @@ usersController.createUser = async (req: ExpressReq, res: ExpressRes, next: Expr
 };
 
 usersController.checkForUser = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  if (res.locals.activeSession) {
-    return next();
-  }
   const foundUser = await user.findOne({ username: req.body.username });
   checkResult(foundUser, next, 'Error: Unable to log in, user does not exist');
   res.locals.user = foundUser;
@@ -46,9 +43,6 @@ usersController.getAllUsers = async (req: ExpressReq, res: ExpressRes, next: Exp
 };
 
 usersController.getUserById = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  if (!res.locals.activeSession) {
-    res.redirect('/api/users/login')
-  };
   const foundUser = await user.findById(req.params.userId);
   checkResult(foundUser, next, 'Error: invalid user id');
   res.locals.user = foundUser;
@@ -56,9 +50,6 @@ usersController.getUserById = async (req: ExpressReq, res: ExpressRes, next: Exp
 };
 
 usersController.updateUser = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
-  if (!res.locals.activeSession) {
-    res.redirect('/api/users/login')
-  };
   const query = { _id: req.params.userId }
   const updatedUser = await user.findOneAndUpdate(query, req.body, { new: true });
   checkResult(updatedUser, next, 'Error: unable to update user');

@@ -1,10 +1,10 @@
-
+import { Button } from "@mui/material"
 
 export default function NavBar() {
 	return (
 		<>
-			<h2>Budget</h2>
-			<h2>All Accounts</h2>
+			<Button href='/budget'>Budget</Button>
+			<Button href='/accounts'>All Accounts</Button>
 			{/* display all user accounts here */}
 			{/* add button to add account */}
 		</>

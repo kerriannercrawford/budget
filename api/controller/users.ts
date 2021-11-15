@@ -30,6 +30,9 @@ usersController.checkForUser = async (req: ExpressReq, res: ExpressRes, next: Ex
 };
 
 usersController.login = async (req: ExpressReq, res: ExpressRes, next: ExpressNext) => {
+  if (res.locals.activeSession) {
+    return next();
+  }
   const correctPassword = await validatePassword(req.body.password, res.locals.user.password);
   checkResult(correctPassword, next, 'Error logging in, username or password does not match');
   return next();

@@ -1,5 +1,5 @@
-import { CategoryController } from '../../src/types/controller';
-import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
+import { CategoryController } from '../types/controller';
+import { ExpressRes, ExpressReq, ExpressNext } from '../types/express';
 
 const categories = require('../models/categoryModel');
 const { checkResult } = require('../util/util');

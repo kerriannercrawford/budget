@@ -1,5 +1,5 @@
-import { SessionController } from '../../src/types/controller';
-import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
+import { SessionController } from '../types/controller';
+import { ExpressRes, ExpressReq, ExpressNext } from '../types/express';
 
 const sessions = require('../models/sessionModel');
 

@@ -1,5 +1,5 @@
-import { GroupController } from '../../src/types/controller';
-import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/express';
+import { GroupController } from '../types/controller';
+import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../types/express';
 
 const express = require('express');
 const groupsController: GroupController = require('../controller/groups');

@@ -1,5 +1,5 @@
-import { SessionController, UserController } from '../../src/types/controller';
-import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/express';
+import { SessionController, UserController } from '../types/controller';
+import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../types/express';
 
 const express = require('express');
 const usersController: UserController = require('../controller/users');

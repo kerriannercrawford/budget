@@ -1,5 +1,5 @@
-import { PayeeController } from '../../src/types/controller';
-import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
+import { PayeeController } from '../types/controller';
+import { ExpressRes, ExpressReq, ExpressNext } from '../types/express';
 
 const payees = require('../models/payeeModel');
 const { checkResult } = require('../util/util');

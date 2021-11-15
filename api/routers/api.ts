@@ -1,4 +1,4 @@
-import { ExpressRes, ExpressReq } from '../../src/types/express';
+import { ExpressRes, ExpressReq } from '../types/express';
 
 const express = require('express');
 const accountsRouter = require('../routers/accounts');

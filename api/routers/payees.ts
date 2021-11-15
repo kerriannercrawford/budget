@@ -1,5 +1,5 @@
-import { PayeeController } from '../../src/types/controller';
-import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/express';
+import { PayeeController } from '../types/controller';
+import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../types/express';
 
 const express = require('express');
 const payeesController: PayeeController = require('../controller/payees');

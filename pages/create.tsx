@@ -1,4 +1,4 @@
-import LoginLayout from '../components/layouts/LoginLayout';
+import LoginLayout from '../app/components/layouts/LoginLayout';
 import { Button, TextField, Grid } from '@mui/material'
 import { useState } from 'react';
 import styles from '../styles/Login.module.css';

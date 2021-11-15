@@ -1,5 +1,5 @@
-import AppLayout from '../components/layouts/AppLayout';
-import BudgetLayout from '../components/layouts/BudgetLayout';
+import AppLayout from '../app/components/layouts/AppLayout';
+import BudgetLayout from '../app/components/layouts/BudgetLayout';
 import Image from 'next/image';
 import Container from '@mui/material/Container';
 

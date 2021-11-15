@@ -1,5 +1,5 @@
-import { AccountController } from '../../src/types/controller';
-import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
+import { AccountController } from '../types/controller';
+import { ExpressRes, ExpressReq, ExpressNext } from '../types/express';
 
 const accounts = require('../models/accountsModel');
 const { checkResult } = require('../util/util');

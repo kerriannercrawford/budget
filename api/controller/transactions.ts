@@ -1,7 +1,7 @@
-import { TransactionController } from '../../src/types/controller';
-import { ExpressReq, ExpressRes, ExpressNext } from '../../src/types/express';
-import { TransactionInformation } from '../../src/types/transactions';
-import { AccountUpdate } from '../../src/types/accounts';
+import { TransactionController } from '../types/controller';
+import { ExpressReq, ExpressRes, ExpressNext } from '../types/express';
+import { TransactionInformation } from '../types/transactions';
+import { AccountUpdate } from '../types/accounts';
 
 const transactions = require('../models/transactionsModel');
 const categories = require('../models/categoryModel');

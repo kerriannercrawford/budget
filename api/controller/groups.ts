@@ -1,5 +1,5 @@
-import { GroupController } from '../../src/types/controller';
-import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
+import { GroupController } from '../types/controller';
+import { ExpressRes, ExpressReq, ExpressNext } from '../types/express';
 
 const groups = require('../models/groupsModel');
 const { checkResult } = require('../util/util');

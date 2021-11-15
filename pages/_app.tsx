@@ -2,10 +2,10 @@ import Head from 'next/head';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { CacheProvider } from '@emotion/react';
-import createEmotionCache from '../styles/createEmotionCache';
+import createEmotionCache from '../app/styles/createEmotionCache';
 
-import '../styles/globals.css';
-import theme from '../styles/theme';
+import '../app/styles/globals.css';
+import theme from '../app/styles/theme';
 
 const clientSideEmotionCache = createEmotionCache();
 

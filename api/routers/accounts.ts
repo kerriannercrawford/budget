@@ -1,5 +1,5 @@
-import { AccountController } from '../../src/types/controller';
-import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/express';
+import { AccountController } from '../types/controller';
+import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../types/express';
 
 const express = require('express');
 const accountsController: AccountController = require('../controller/accounts');

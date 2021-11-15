@@ -1,5 +1,5 @@
-import { TransactionController } from '../../src/types/controller';
-import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../../src/types/express';
+import { TransactionController } from '../types/controller';
+import { ExpressRes, ExpressReq, DeleteResponseMessage } from '../types/express';
 
 const express = require('express');
 const transactionsController: TransactionController = require('../controller/transactions');

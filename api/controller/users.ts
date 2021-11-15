@@ -1,5 +1,5 @@
-import { UserController } from '../../src/types/controller';
-import { ExpressRes, ExpressReq, ExpressNext } from '../../src/types/express';
+import { UserController } from '../types/controller';
+import { ExpressRes, ExpressReq, ExpressNext } from '../types/express';
 
 const user = require('../models/userModel');
 const { checkResult, encryptPassword, validatePassword } = require('../util/util');

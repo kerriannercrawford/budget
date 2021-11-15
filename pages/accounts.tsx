@@ -1,5 +1,5 @@
-import AppLayout from '../components/layouts/AppLayout';
-import AccountLayout from '../components/layouts/AccountLayout';
+import AppLayout from '../app/components/layouts/AppLayout';
+import AccountLayout from '../app/components/layouts/AccountLayout';
 
 export default function Account() {
 	return (

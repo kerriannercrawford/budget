@@ -1,18 +1,12 @@
 import LoginLayout from '../app/components/layouts/LoginLayout';
-import Image from 'next/image';
 import { Button, TextField, Grid, Alert } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { login, updateUsername, updatePassword } from '../app/redux/slices/userSlice';
-import { setDate } from '../app/redux/slices/budgetSlice';
+import { updateUsername, updatePassword } from '../app/redux/slices/userSlice';
 import { setError, resetError } from '../app/redux/slices/infoSlice';
-import { setAccounts } from '../app/redux/slices/accountsSlice';
-import { setCategories } from '../app/redux/slices/categoriesSlice';
-import { setGroups } from '../app/redux/slices/groupsSlice';
-import { setPayees } from '../app/redux/slices/payeesSlice';
-import { setTransactions } from '../app/redux/slices/transactionsSlice';
+import { loginDispatchers } from '../app/util/dispatchers';
 
 export default function Home() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -32,20 +26,8 @@ export default function Home() {
     let userResponse;
     try {
       userResponse = await axios.post('/api/users/login', {username, password});
-      const accounts = await axios.get(`/api/accounts/user/${userResponse.data._id}`);
-      const categories = await axios.get(`/api/categories/user/${userResponse.data._id}`);
-      const groups = await axios.get(`/api/groups/user/${userResponse.data._id}`);
-      const payees = await axios.get(`/api/payees/user/${userResponse.data._id}`);
-      const transactions = await axios.get(`/api/transactions/user/${userResponse.data._id}`);
-      const date = new Date;
+      loginDispatchers(dispatch, userResponse.data)
       setLoggedIn(true);
-      dispatch(login(userResponse.data));
-      dispatch(setDate())
-      dispatch(setAccounts(accounts.data));
-      dispatch(setCategories(categories.data));
-      dispatch(setGroups(groups.data));
-      dispatch(setPayees(payees.data));
-      dispatch(setTransactions(transactions.data));
     } catch(e) {
       dispatch(setError(e.message));
       return;

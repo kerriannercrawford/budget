@@ -6,8 +6,6 @@ import { Box } from '@mui/material';
 export default function Budget() {
 	const state = useSelector((state: any) => state);
 	const { groups, categories } = state;
-	console.log(groups)
-	console.log(categories)
 
 	const generateDataGrid = () => {
 		const res: any = [];
@@ -35,23 +33,20 @@ export default function Budget() {
 		];
 	}
 
-	const makeRows = (groupId: string) => {
+	const makeRows = (categoryGroupId: string) => {
 		const res: any = [];
 		for (let i = 0; i < categories.categories.length; i += 1) {
-			const currentCategory = categories.categories[i];
-			console.log(currentCategory)
-			console.log(groupId)
-			if (currentCategory.groupId !== groupId) {
+			const { groupId, name, assigned, activity, available } = categories.categories[i];
+			if (categoryGroupId !== groupId) {
 				continue;
 			}
-			const row = { 
+			res.push({ 
 				id: i, 
-				category: currentCategory.name.categoryName, 
-				assigned: currentCategory.assigned,
-				activity: currentCategory.activity,
-				available: currentCategory.available
-			}
-			res.push(row)
+				category: name.categoryName, 
+				assigned,
+				activity,
+				available
+			})
 		}
 		return res;
 	}

@@ -12,6 +12,7 @@ export default function Home() {
     switch (state.budget.view) {
       case 'budget': 
         return <Budget />
+      case 'account':
       case 'accounts': 
         return <Accounts />
     }

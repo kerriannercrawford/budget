@@ -1,38 +1,55 @@
 import LoginLayout from '../app/components/layouts/LoginLayout';
 import Image from 'next/image';
-import { Button, TextField, Grid, Alert } from '@mui/material'
-import { useState, useEffect } from 'react';
+import { Button, TextField, Grid, Alert } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { login, updateUsername, updatePassword } from '../app/redux/slices/userSlice';
+import { setDate } from '../app/redux/slices/budgetSlice';
+import { setError, resetError } from '../app/redux/slices/infoSlice';
+import { setAccounts } from '../app/redux/slices/accountsSlice';
+import { setCategories } from '../app/redux/slices/categoriesSlice';
+import { setGroups } from '../app/redux/slices/groupsSlice';
+import { setPayees } from '../app/redux/slices/payeesSlice';
+import { setTransactions } from '../app/redux/slices/transactionsSlice';
 
 export default function Home() {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser]: any = useState();
-
+  const state = useSelector((state: any) => state);
+  const { user, info } = state;
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
+    const { username, password } = user;
     if (!username || !password) {
-      setError(true);
-      setErrorMessage('Username or password missing');
+      dispatch(setError('Error: Password and/or username is missing'));
       return;
     }
-    let res;
+    dispatch(resetError())
+    let userResponse;
     try {
-      setError(false)
-      res = await axios.post('/api/users/login', {username, password});
+      userResponse = await axios.post('/api/users/login', {username, password});
+      const accounts = await axios.get(`/api/accounts/user/${userResponse.data._id}`);
+      const categories = await axios.get(`/api/categories/user/${userResponse.data._id}`);
+      const groups = await axios.get(`/api/groups/user/${userResponse.data._id}`);
+      const payees = await axios.get(`/api/payees/user/${userResponse.data._id}`);
+      const transactions = await axios.get(`/api/transactions/user/${userResponse.data._id}`);
+      const date = new Date;
+      setLoggedIn(true);
+      dispatch(login(userResponse.data));
+      dispatch(setDate())
+      dispatch(setAccounts(accounts.data));
+      dispatch(setCategories(categories.data));
+      dispatch(setGroups(groups.data));
+      dispatch(setPayees(payees.data));
+      dispatch(setTransactions(transactions.data));
     } catch(e) {
-      setError(true)
-      setErrorMessage('Error while logging in. Please check username and/or password')
+      dispatch(setError(e.message));
       return;
     }
-    setLoggedIn(true);
-    setUser(res.data);
   }
 
   const alert = (message: string) => {
@@ -40,19 +57,16 @@ export default function Home() {
   }
 
   const handleUsernameChange = (e: any) => {
-    setUsername(e.target.value);
+    dispatch(updateUsername(e.target.value));
   }
 
   const handlePasswordChange = (e: any) => {
-    setPassword(e.target.value);
+    dispatch(updatePassword(e.target.value));
   }
 
   useEffect(() => {
     if (loggedIn && user) {
-      console.log(user._id)
-      router.push({ pathname: '/budget', query: { 
-        userId: user._id
-      } }, '/budget')
+      router.push('/budget')
     }
   })
 
@@ -67,7 +81,7 @@ export default function Home() {
       <Grid item>
         <Button onClick={handleLogin}>Log in</Button>
       </Grid>
-      {error && alert(errorMessage)}
+      {info.error && alert(info.errorMessage)}
       <Grid item>
         <Button href='/create'>Create Account</Button>
       </Grid>
@@ -82,3 +96,4 @@ Home.getLayout = function getLayout(page: any) {
     </LoginLayout>
   )
 }
+

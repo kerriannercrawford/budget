@@ -12,7 +12,8 @@ accountsController.createAccount = async (req: ExpressReq, res: ExpressRes, next
     name: {
       userId,
       accountName
-    }
+    },
+    accountName
   });
   checkResult(createdAccount, next, 'Error: Unable to create account');
   res.locals.account = createdAccount;

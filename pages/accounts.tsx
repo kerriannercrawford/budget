@@ -1,9 +1,22 @@
 import AppLayout from '../app/components/layouts/AppLayout';
 import AccountLayout from '../app/components/layouts/AccountLayout';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Account() {
+  const state = useSelector((state: any) => state)
+  console.log(state)
+  const accounts = state.accounts.accounts;
+  const displayAccounts = () => {
+    const arr = [];
+    accounts.forEach((account: any) => {
+      arr.push(<h3>{JSON.stringify(account)}</h3>)
+    })
+  }
 	return (
-		<h2>Blah</h2>
+		<>
+    <h2>Your accounts</h2>
+    {displayAccounts()}
+    </>
 	)
 }
 

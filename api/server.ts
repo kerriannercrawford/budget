@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const cookieParser = require('cookie-parser');
 const apiRouter = require('./routers/api');
 const dev = process.env.NODE_ENV !== 'production';

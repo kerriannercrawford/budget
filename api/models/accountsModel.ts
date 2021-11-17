@@ -7,6 +7,7 @@ const accountSchema = new Schema({
     required: true,
     unique: true
   },
+  accountName: String,
   active: { type: Boolean, default: true },
   clearedBalance: { type: Number, default: 0.00 },
   unclearedBalance: { type: Number, default: 0.00 }

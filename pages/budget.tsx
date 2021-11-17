@@ -1,26 +1,30 @@
 import AppLayout from '../app/components/layouts/AppLayout';
-import BudgetLayout from '../app/components/layouts/BudgetLayout';
+import { useSelector, useDispatch } from 'react-redux';
+import Budget from '../app/components/Budget';
+import Accounts from '../app/components/Accounts';
 import Image from 'next/image';
-import Container from '@mui/material/Container';
-import axios from 'axios';
 
-export default function Home({ user }: any) {
+export default function Home() {
+  const state = useSelector((state: any) => state);
+  console.log(state)
+  const { user, accounts, categories, groups, payees, transactions } = state;
+  const render = () => {
+    switch (state.budget.view) {
+      case 'budget': 
+        return <Budget />
+      case 'accounts': 
+        return <Accounts />
+    }
+  }
   return (
-    <h1>Welcome to your budget, {user.firstName}</h1>
+    <>{render()}</>
   )
 }
 
 Home.getLayout = function getLayout(page: any) {
   return (
     <AppLayout>
-      <BudgetLayout>{page}</BudgetLayout>
+     {page}
     </AppLayout>
   )
-}
-
-Home.getInitialProps = async ({ query }: any) => {
-  const { userId } = query;
-  const response = await axios.get(`/api/users/${userId}`);
-  console.log(response.data)
-  return { user: response.data };
 }

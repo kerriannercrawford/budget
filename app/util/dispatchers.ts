@@ -1,4 +1,4 @@
-import { setDate } from '../redux/slices/budgetSlice';
+import { setDate, setView } from '../redux/slices/budgetSlice';
 import { setError, resetError } from '../redux/slices/infoSlice';
 import { setAccounts } from '../redux/slices/accountsSlice';
 import { setCategories } from '../redux/slices/categoriesSlice';
@@ -23,5 +23,6 @@ export async function loginDispatchers(dispatch: any, user: any) {
 	dispatch(setGroups(groups.data));
 	dispatch(setPayees(payees.data));
 	dispatch(setTransactions(transactions.data));
+	dispatch(setView('budget'))
 }
 

@@ -6,7 +6,7 @@ export const budgetSlice = createSlice({
 		currentYear: '',
 		currentMonth: '',
 		currentDay: '', 
-		view: 'budget'
+		view: 'login'
 	},
 	reducers: {
 		setDate: (state) => {

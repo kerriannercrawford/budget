@@ -15,7 +15,7 @@ export default function Budget() {
 			const rows = makeRows(group._id);
 			res.push(
 				<Box>
-					<h2>{group.name.groupName}</h2>
+					<p style={{ fontSize: '20px', marginTop: '5px', marginLeft: '5px', margin: '5px 0px 5px 15px' }}>{group.name.groupName}</p>
 					<DataGrid rows={rows} columns={columns} hideFooter ></DataGrid>
 				</Box>
 			)
@@ -26,10 +26,10 @@ export default function Budget() {
 
 	const makeColumns = () => {
 		return [
-			{ field: 'category', headerName: 'category', width: 150 },
-			{ field: 'assigned', headerName: 'assigned', width: 150 },
-			{ field: 'activity', headerName: 'activity', width: 150 },
-			{ field: 'available', headerName: 'available', width: 150 }
+			{ field: 'category', headerName: 'category', width: '200' },
+			{ field: 'assigned', headerName: 'assigned', width: '200' },
+			{ field: 'activity', headerName: 'activity', width: '200' },
+			{ field: 'available', headerName: 'available', width: '200' }
 		];
 	}
 

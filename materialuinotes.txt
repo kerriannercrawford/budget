@@ -1,0 +1,14 @@
+LIST for left bar 
+PERMANENT drawer 
+
+
+
+
+
+
+
+2020 Update
+
+FWIW I was just able to add these two style properties to a Box component to achieve a scrollable <div> column:
+
+<Box style={{maxHeight: '100vh', overflow: 'auto'}}>...</Box>

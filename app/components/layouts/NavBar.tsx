@@ -1,28 +1,45 @@
-import { Button, Divider } from "@mui/material"
+import Grid from '@mui/material/Grid';
+import { Provider } from 'react-redux';
+import store from '../../redux/store';
+import Possum from '../Possum';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import { Button } from '@material-ui/core';
+import Divider from '@mui/material/Divider';
+import ListAccounts from '../ListAccounts';
+import { setView } from '../../redux/slices/budgetSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { setView } from "../../redux/slices/budgetSlice";
 
-export default function NavBar() {
-	const dispatch = useDispatch();
+export default function NavBar({children}: any) {
+  const dispatch = useDispatch();
 	const state = useSelector((state: any) => state);
 
-	const generateAccounts = () => {
-		const { accounts } = state.accounts;
-		const res: any = [];
-		accounts.forEach((account: any) => {
-			res.push(<Button>{account.accountName}</Button>)
-		})
-		res.push(<Divider/>)
-		res.push(<Button>Add an Account</Button>)
-		return res;
+	const generateUponLogin = () => {
+		return (
+			<><Divider style={{ margin: '10px 0px 10px 0px' }}/>
+			<Button>Settings</Button>
+			<Divider style={{ margin: '10px 0px 10px 0px' }}/>
+			<Button style={{ marginBottom: '5px' }} onClick={() => dispatch(setView('budget'))}>
+				<MonetizationOnIcon fontSize='large' style={{ paddingRight: '5px' }}/>   
+				Budget
+			</Button>
+			<Button style={{ marginBottom: '5px' }} onClick={() => dispatch(setView('allaccounts'))}>
+				<AccountBalanceIcon fontSize='large' style={{ paddingRight: '5px' }}/>   
+				All Accounts
+			</Button>
+			<Divider style={{ margin: '10px 0px 10px 0px' }}/>
+			<ListAccounts/>
+			<Divider style={{ margin: '10px 0px 10px 0px' }}/>
+			<Button>Add New Account</Button></>
+		)
 	}
 
 	return (
-		<>
-			<Button onClick={() => dispatch(setView('budget'))}>Budget</Button>
-			<Button onClick={() => dispatch(setView('accounts'))}>All Accounts</Button>
-			<Divider />
-			{generateAccounts()}
-		</>
+		<Provider store={store}>
+			<Grid container direction='column'>
+				<Possum />
+				{ state.user.loggedIn && generateUponLogin() }
+			</Grid>
+		</Provider>
 	)
 }

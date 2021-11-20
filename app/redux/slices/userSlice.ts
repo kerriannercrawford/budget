@@ -8,7 +8,8 @@ export const userSlice = createSlice({
 		firstName: '',
 		lastName: '',
 		userId: '',
-		budgetName: ''
+		budgetName: '',
+		loggedIn: false
 	},
 	reducers: {
 		login: (state, action) => {
@@ -19,6 +20,7 @@ export const userSlice = createSlice({
 			state.userId = _id;
 			state.budgetName = budgetName;
 			state.password = '';
+			state.loggedIn = true;
 		},
 		updateUsername: (state, action) => {
 			state.username = action.payload;
